@@ -29,6 +29,7 @@
 #'abline(h=2*mean(Cia),lty=2)
 #'@export
 
+#' @importFrom pracma hessian
 diag.bs=function(model,mu.link = "identity",sigma.link = "identity")
 {
 

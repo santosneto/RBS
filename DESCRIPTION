@@ -5,8 +5,8 @@ Authors@R: person("Manoel", "Santos-Neto", email = "manoel.ferreira@ufcg.edu.com
 Description: This package includes the estimation of model parameters,
     hypothesis tests for the precision parameter, a residual analysis and influence
     diagnostic tools
-Depends: 
-    R (>= 3.1.2)
+Depends:
+    R (>= 3.1.2), gamlss
 License: GNU GPL v2
 LazyData: true
 RoxygenNote: 5.0.0.9000

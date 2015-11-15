@@ -421,6 +421,8 @@ score.test=function(modelH0,modelH1)
 #' ad.testg(x,cdf)
 #' cvm.testg(x,cdf)
 #'@export
+
+#'@importFrom nortest ad.test
 ad.testg = function(x,cdf)
 {
   DNAME <- deparse(substitute(x))
@@ -476,6 +478,7 @@ ad.testg = function(x,cdf)
 #' cvm.testg(x,cdf)
 #'@export
 
+#' @importFrom nortest cvm.test
 cvm.testg = function(x,cdf)
 {
   DNAME <- deparse(substitute(x))
