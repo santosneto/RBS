@@ -20,7 +20,7 @@
 #'fit = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
 #'summary(fit)
 #'set.seed(2015)
-#'envelope(fit)
+#'envelope(fit,precision="fixed")
 #'Cib <- diag.bs(fit)$Ci.beta
 #'plot(Cib,ylim=c(0,1),pch=19)
 #'abline(h=2*mean(Cib),lty=2)
