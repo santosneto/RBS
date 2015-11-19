@@ -329,6 +329,8 @@ rcbs <- function(n, alpha = 1, beta = 1)
   return(t)
 }
 
+
+
 #'Brown and Miller's biaxial fatigue data
 #'
 #'Several data sets related to the BS distribution are available in the RBS package, which have been taken from the literature on this topic.

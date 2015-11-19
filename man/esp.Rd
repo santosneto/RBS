@@ -53,9 +53,9 @@ genetation for the \code{RBS} parameterization of the RBS distribution.
 \details{
 The parametrization of the normal distribution given in the function RBS() is
 
-\deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-                                                    \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+\deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+                                                    \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 }
 \note{
 For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.

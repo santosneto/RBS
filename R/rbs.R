@@ -32,9 +32,9 @@
 #'
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -170,9 +170,9 @@ RBS <- function (mu.link = "identity" , sigma.link="identity")
 #'
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -247,9 +247,9 @@ sigmatil=function(y)
 #'
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -342,9 +342,9 @@ esp = function(mu=1,sigma=1)
 #'
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -420,9 +420,9 @@ resrbs=function(y,mu,sigma)
 #' @param ... other graphical parameters for plotting
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -482,9 +482,9 @@ dRBS<-function(x, mu=1, sigma=1, log=FALSE)
 #' @param ... other graphical parameters for plotting
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -561,9 +561,9 @@ pRBS <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
 #'
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -638,9 +638,9 @@ qRBS = function (p, mu = 0.5, sigma = 1, lower.tail = TRUE,
 #' @param ... other graphical parameters for plotting
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -700,9 +700,9 @@ rRBS = function(n, mu=1, sigma=1)
 #' @param ... other graphical parameters for plotting
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
@@ -757,11 +757,11 @@ plotRBS = function(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, title="tit
 #' @param ... other graphical parameters for plotting
 #' @details  The parametrization of the normal distribution given in the function RBS() is
 #'
-#' \deqn{f_{Y}(y;\mu,\delta)=\frac{\exp\left(\delta/2\right)\sqrt{\delta+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
-#'\left[y+\frac{\delta \mu}{\delta+1}\right] \exp\left(-\frac{\delta}{4}
-#'                                                     \left[\frac{y\{\delta+1\}}{\delta\mu}+\frac{\delta\mu}{y\{\delta+1\}}\right]\right) y>0.}
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
 #'
-#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'@return Returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
 #'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
 #'
@@ -782,6 +782,185 @@ meanRBS = function (obj)
   meanofY = fitted(obj, "mu")
   meanofY
 }
+
+
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage est.rbs(x,xi=0.95)
+#'
+#' @param x vector of data.
+#' @param xi confidence level. Default is 0.95.
+
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return Returns the estimates and confidence intervals of mu and sigma.
+#'
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'@examples data(psi31)
+#'est.rbs(psi31)
+#'
+#'x<- rRBS(100)
+#'est.rbs(x)
+#'@export
+
+est.rbs <- function(x,xi=0.95)
+{
+
+n <- length(x)
+
+ic.bs <- function(modelo=NULL,estimates = NULL,n=NULL,method = "lr",level=0.95)
+{
+
+  zlevel <- abs(qnorm((1-level)/2))
+  est <- estimates
+  if(is.null(est) == TRUE && is.null(modelo) == FALSE)
+  {
+
+
+    if(method == "lr")
+    {
+      est.mu <- modelo$mu.coefficients
+      est.delta <- modelo$sigma.coefficients
+      var. <- diag(vcov(modelo))
+      se.mu <- sqrt(var.[1])
+      se.delta <- sqrt(var.[2])
+      li.mu <- est.mu - se.mu*zlevel
+      li.delta <- est.delta- se.delta*zlevel
+      ls.mu <- est.mu + se.mu*zlevel
+      ls.delta <- est.delta + se.delta*zlevel
+
+    }
+    else
+    {
+      est.mu <- coef(modelo)[1]
+      est.delta <- coef(modelo)[2]
+      var. <- diag(vcov(modelo))
+      se.mu <- sqrt(var.[1])
+      se.delta <- sqrt(var.[2])
+      li.mu <- est.mu - se.mu*zlevel
+      li.delta <- est.delta- se.delta*zlevel
+      ls.mu <- est.mu + se.mu*zlevel
+      ls.delta <- est.delta + se.delta*zlevel
+    }
+
+  }
+  else{
+    if(method == "mm" )
+    {
+
+      est.mu <- est[1]
+      est.delta <- est[2]
+
+      var.mu  <- (1/n)*(((est.mu^2)*(2*est.delta + 5))/((est.delta+1)^2))
+      var.delta <- (1/n)*( (2*(est.delta^4) + 28*(est.delta^3) + 122*(est.delta^2) +  126*est.delta + 57)/((est.delta+4)^2))
+
+      se.mu <- sqrt(var.mu)
+      se.delta <- sqrt(var.delta)
+      li.mu <- est.mu - se.mu*zlevel
+      li.delta <- est.delta - se.delta*zlevel
+      ls.mu <- est.mu + se.mu*zlevel
+      ls.delta <- est.delta + se.delta*zlevel
+
+    }
+
+    else{
+
+      est.mu <- est[1]
+      est.delta <- est[2]
+
+      var.mu  <- (1/n)*(((est.mu^2)*(2*est.delta + 5))/((est.delta+1)^2))
+      var.delta <- (1/n)*(2*(est.delta^2))
+
+      se.mu <- sqrt(var.mu)
+      se.delta <- sqrt(var.delta)
+      li.mu <- est.mu - se.mu*zlevel
+      li.delta <- est.delta - se.delta*zlevel
+      ls.mu <- est.mu + se.mu*zlevel
+      ls.delta <- est.delta + se.delta*zlevel
+
+    }
+
+  }
+
+  ic.mu <- round(c(li.mu,ls.mu),2)
+  ic.delta <- round(c(li.delta,ls.delta),2)
+
+  ics <- list(ic.mu = ic.mu,ic.delta = ic.delta)
+
+  return(ics)
+}
+
+
+g1 <- function(vP,x)
+{
+  mu <- vP[1];delta=vP[2]
+  m1 <- (mu - x)
+  m2 <- (((mu^2)*((2*delta)+5))/((delta+1)^2) - (x - mu)^2)
+  m3 <- (((delta+1)^2)/(mu*(delta^2)) - 1/x)
+  f <- cbind(m1,m2,m3)
+  return(f)
+}
+
+Dg1 <- function(vP,x)
+{
+  mu <- vP[1];delta=vP[2]
+  g11 <- 1 ;g12 = 0
+  g21 <- (2*mu*(2*delta+5))/((delta+1)^2) - 2*mu + 2*mean(x)
+  g22 <-  -(2*(mu^2)*(delta+4))/((delta+1)^3)
+  g31 <- -((delta+1)^2)/((mu*delta)^2)
+  g32 <- -(2*(delta+1))/(mu*(delta^3))
+
+  G <- matrix(c(g11,g21,g31,g12,g22,g32),nrow=3,ncol=2)
+  return(G)
+}
+
+mum <- mean(x)
+xbarh <- 1/mean(1/x)
+deltamm <- 1/(sqrt(mum/xbarh) - 1)
+s2 <- ((n-1)/n)*var(x)
+deltam <- (mum^2 - s2 + sqrt((mum^4) + 3*(mum^2)*s2))/s2
+con <- gamlss.control(trace = FALSE, autostep = FALSE, save = TRUE)
+estmv <- gamlss(x~1,family=RBS(mu.link="identity",sigma.link="identity"),control=con,method=CG())
+res <- gmm(g1,x,c(mu = mum, delta = deltamm),gradv = Dg1)
+teste <- specTest(res,theta0=c(mu,delta))
+pvalue <- teste$test[2]
+
+vpm <- round(c(mum,deltam),2)
+vpmm <- round(c(mum,deltamm),2)
+vpmg <- round(res$coefficients,2)
+vpmv <- round(c(estmv$mu.coefficients,estmv$sigma.coefficients),2)
+
+ic.mv  <- ic.bs(modelo=estmv,method="lr",level=xi)
+ic.mm  <- ic.bs(estimates=c(mum,deltam),n = n, method="mm",level=xi)
+ic.mmm <- ic.bs(estimates=c(mum,deltamm),n=n, method="mmm",level=xi)
+ic.mmg <- ic.bs(modelo=res,method="gmm",level=xi)
+
+r1<-rbind(c(ic.mm$ic.mu[1],ic.mm$ic.mu[2]),c(ic.mm$ic.delta[1],ic.mm$ic.delta[2]))
+r2<-rbind(c(ic.mmm$ic.mu[1],ic.mmm$ic.mu[2]),c(ic.mmm$ic.delta[1],ic.mmm$ic.delta[2]))
+r3<-rbind(c(ic.mmg$ic.mu[1],ic.mmg$ic.mu[2]),c(ic.mmg$ic.delta[1],ic.mmg$ic.delta[2]))
+r4<-rbind(c(ic.mv$ic.mu[1],ic.mv$ic.mu[2]),c(ic.mv$ic.delta[1],ic.mv$ic.delta[2]))
+
+result <- cbind(vpm,r1,vpmm,r2,vpmg,r3,vpmv,r4)
+colnames(result) <- c("MO","Lower","Upper","MM","Lower","Upper","GMM","Lower","Upper","MLE","Lower","Upper")
+rownames(result) <- c("mu","sigma")
+return(result)
+
+}
+
 
 
 
