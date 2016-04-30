@@ -57,7 +57,7 @@
 #' @export
 
 
-envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed","varying"), dist = RBS(mu.link = "identity",sigma.link = "identity") )
+envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed","varying"), dist = RBS(mu.link = "identity",sigma.link = "identity") ,color="gray80",xlabel="Theorical Quantile",ylabel="Empirical Quantile",main="",pch=20)
 {
 
   if(precision!= "fixed")
@@ -114,15 +114,15 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
     par(mar=c(4., 4., 0.1, 0.1))
     plot(r,r1,type = "n", ylim=faixa,axes=FALSE,xlab="",ylab="")
     par(new=TRUE)
-    polygon(xx,yy,col="gray80",border=NA)
+    polygon(xx,yy,col=color,border=NA)
     par(new=TRUE)
-    qqnorm(e1,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="gray")
+    qqnorm(e1,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="black")
     par(new=TRUE)
-    qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="gray")
+    qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="black")
     par(new=TRUE)
     qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col="black")
     par(new=TRUE)
-    qqnorm(td,xlab="Theorical Quantile",main="",ylab="Empirical Quantile",ylim=faixa,pch=20,cex=1,lwd=1)
+    qqnorm(td,xlab=xlabel,main=main,ylab=ylabel,ylim=faixa,pch=pch,cex=1,lwd=1)
   } else{
     alfa1 <- ceiling(k*alpha)
     alfa2 <- ceiling(k*(1-alpha))
@@ -174,15 +174,15 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
     par(mar=c(4., 4., 0.1, 0.1))
     plot(r,r1,type = "n", ylim=faixa,axes=FALSE,xlab="",ylab="")
     par(new=TRUE)
-    polygon(xx,yy,col="gray80",border=NA)
+    polygon(xx,yy,col=color,border=NA)
     par(new=T)
-    qqnorm(e1,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="gray")
+    qqnorm(e1,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="black")
     par(new=TRUE)
-    qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="gray")
+    qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col="black")
     par(new=TRUE)
     qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col="black")
     par(new=TRUE)
-    qqnorm(td,xlab="Theorical Quantile",main="",ylab="Empirical Quantile",ylim=faixa,pch=20,cex=1,lwd=1)
+    qqnorm(td,xlab=xlabel,main=main,ylab=ylabel,ylim=faixa,pch=pch,cex=1,lwd=1)
   }
 }
 
