@@ -2,7 +2,7 @@
 #' @description A normal plot with simulated envelope of the residual is produced.
 #'
 #'@usage envelope(model,k=19,alpha=0.05,res="deviance", precision = c("fixed","varying"),
-#' dist = RBS(mu.link = "identity",sigma.link = "identity") )
+#' dist = RBS(mu.link = "identity",sigma.link = "identity"),...)
 #'
 #' @param model object of class \code{gamlss} holding the fitted model.
 #' @param k number of replications for envelope construction. Default is 19.
