@@ -272,7 +272,7 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
   tau <- sigma_linkfun(sigma)
   bi <- sigma_mu.eta(tau)
   k <- lz
-  ak <- coef(model,what="sigma")[2]
+  ak <- coef(model,what="sigma")[k]
   szk <- sd(z[,k])
   dsigma <- (y+ mu)/((sigma*y) + y + (sigma*mu)) - y/(4*mu) - (sigma*(sigma+2)*mu)/(4*(sigma+1)*(sigma+1)*y) + sigma/(2*(sigma+1))
   Deltasigma <- crossprod(z,diag(bi*dsigma))
