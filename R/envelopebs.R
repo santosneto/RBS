@@ -121,7 +121,7 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
     par(new=TRUE)
     qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col=border.col)
     par(new=TRUE)
-    qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col=border.col)
+    qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col="black")
     par(new=TRUE)
     qqnorm(td,xlab=xlabel,main=main,ylab=ylabel,ylim=faixa,pch=pch,cex=1,lwd=1)
   } else{
@@ -181,7 +181,7 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
     par(new=TRUE)
     qqnorm(e2,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=1,lwd=1,col=border.col)
     par(new=TRUE)
-    qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col=border.col)
+    qqnorm(xb,axes=F,xlab="",ylab="",main="",type="l",ylim=faixa,lty=2,lwd=1,col="black")
     par(new=TRUE)
     qqnorm(td,xlab=xlabel,main=main,ylab=ylabel,ylim=faixa,pch=pch,cex=1,lwd=1)
   }
