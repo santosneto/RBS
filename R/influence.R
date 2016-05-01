@@ -155,12 +155,10 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
   phi<- ((2*sigma)+5)/((sigma+1)^2)
   sy<- sqrt((mu^2)*phi)
 
-  dymu <- -(sigma*(sigma+1))/( ((sigma*y)  + y  + (sigma*mu))^2) + (sigma+1)/(4*(mu^2)) +  ((sigma^2)/(4*(sigma+1)*(y^2))) #ok!!
-  x <- model12$mu.x
+  dymu <- -(sigma*(sigma+1))/( ((sigma*y)  + y  + (sigma*mu))^2) + (sigma+1)/(4*(mu^2)) +  ((sigma^2)/(4*(sigma+1)*(y^2)))
   Deltamu <- crossprod(x,diag(ai*dymu*sy))
-  z  <- model12$sigma.x
   p<-ncol(x);q<-ncol(z)
-  dysigma <- (-mu/( ((sigma*y) + y + (sigma*mu))^2))  -  1/(4*mu) + (sigma*(sigma+2)*mu)/(4*(y^2)*((sigma+1)^2))  #ok!!
+  dysigma <- (-mu/( ((sigma*y) + y + (sigma*mu))^2))  -  1/(4*mu) + (sigma*(sigma+2)*mu)/(4*(y^2)*((sigma+1)^2))
   Deltasigma <- crossprod(z,diag(bi*dysigma*sy))
   Delta <- rbind(Deltamu,Deltasigma)
 
