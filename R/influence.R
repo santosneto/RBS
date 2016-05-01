@@ -3,8 +3,8 @@
 #'
 #'@usage diag.bs(model)
 #'
-#' @param model object of class \code{gamlss} holding the fitted model.
-#'
+#'@param model object of class \code{gamlss} holding the fitted model.
+#'@param scheme Default is "case.weight". But, can be "response", "location" or "precision".
 #'@return Local influence measures.
 #'
 #' @author
@@ -30,8 +30,6 @@
 #'@export
 
 #' @importFrom pracma hessian
-#'
-#'
 diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case.weight",lx=NULL,lz=NULL)
 {
 

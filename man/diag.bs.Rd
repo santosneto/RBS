@@ -8,6 +8,8 @@ diag.bs(model)
 }
 \arguments{
 \item{model}{object of class \code{gamlss} holding the fitted model.}
+
+\item{scheme}{Default is "case.weight". But, can be "response", "location" or "precision".}
 }
 \value{
 Local influence measures.
