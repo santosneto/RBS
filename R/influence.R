@@ -298,7 +298,7 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
   autovmaxthetaPZ<- eigen(BT,symmetric=TRUE)$val[1]
   vetorthetaPZ<- eigen(BT,symmetric=TRUE)$vec[,1]
   dmaxG.theta<-abs(vetorthetaPZ)
-  vCithetaPX<-2*abs(diag(BT))
+  vCithetaPZ<-2*abs(diag(BT))
   Cb0<-vCithetaPZ
   Cb.theta<-Cb0/sum(Cb0)
 
