@@ -81,11 +81,9 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
       y1 <- mapply(rRBS,n=1,mu=mu,sigma=sigma)
       nresp <- y1
 
-      if(p == 1) form <- nresp ~ 0 + X
-      else form <- nresp ~ X[,-1]
+      if(p == 1) form <- nresp ~ 0 + X else form <- nresp ~ X[,-1]
 
-      if(q == 1) form1 <- nresp ~ 0 + Z
-      else  form1 <- nresp ~ Z[,-1]
+      if(q == 1) form1 <- nresp ~ 0 + Z else  form1 <- nresp ~ Z[,-1]
 
       conh0 = gamlss.control(trace = FALSE, autostep = FALSE, save = TRUE)
       model1 <- gamlss(formula=form,sigma.formula = form1 ,family=dist,method=CG(),control = conh0)
@@ -144,8 +142,7 @@ envelope <- function(model,k=19,alpha=0.05,res="deviance", precision = c("fixed"
 
       y1 <- mapply(rRBS,n=1,mu=mu,sigma=sigma)
       nresp <- y1
-      if(p == 1) form <- nresp ~ 0 + X
-      else  form <- nresp ~ X[,-1];
+      if(p == 1) form <- nresp ~ 0 + X else  form <- nresp ~ X[,-1];
 
       conh0 <- gamlss.control(trace = FALSE, autostep = FALSE, save = TRUE)
       model1 <- gamlss(formula=form ,family=dist,method=CG(),control = conh0)
