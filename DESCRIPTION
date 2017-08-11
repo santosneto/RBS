@@ -1,6 +1,6 @@
 Package: RBS
 Title: Reparameterized Birnbaum-Saunders regression model
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Manoel", "Santos-Neto", email = "manoel.ferreira@ufcg.edu.com", role = c("aut", "cre"))
 Description: This package includes the estimation of model parameters,
     hypothesis tests for the precision parameter, a residual analysis and influence
@@ -9,11 +9,13 @@ Depends:
     R (>= 3.1.2),
     gamlss,
     gmm,
-    pracma
+    pracma,
+    gamlss.nl
 License: GNU GPL v2
 LazyData: true
 RoxygenNote: 5.0.1
 Imports:
     gamlss,
     pracma,
-    nortest
+    nortest,
+    gamlss.nl
