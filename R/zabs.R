@@ -1,22 +1,21 @@
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -29,50 +28,50 @@
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the zero adjusted Birnbaum-Saunders distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the zero adjusted Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
-#'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
-#'meanZABS(fit)
+#'@examples plotZARBS()
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
+#'meanZARBS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
 #'
 #'@export
 #'
-ZABS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
+ZARBS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
 {
-  mstats = checklink("mu.link", "ZABS", substitute(mu.link),
+  mstats = checklink("mu.link", "ZARBS", substitute(mu.link),
                      c("sqrt", "log", "identity"))
-  dstats = checklink("sigma.link", "ZABS", substitute(sigma.link),
+  dstats = checklink("sigma.link", "ZARBS", substitute(sigma.link),
                      c("sqrt", "log", "identity"))
-  vstats = checklink("nu.link", "ZABS", substitute(nu.link),
+  vstats = checklink("nu.link", "ZARBS", substitute(nu.link),
                      c("logit", "probit", "cloglog", "log", "own"))
 
-  structure(list(family = c("ZABS", "Zero-Adjusted Birnbaum-Saunders"),
+  structure(list(family = c("ZARBS", "Zero-Adjusted Reparameterized Birnbaum-Saunders"),
                  parameters = list(mu = TRUE, sigma = TRUE, nu = TRUE),
                  nopar = 3,
                  type = "Mixed",
@@ -154,7 +153,7 @@ ZABS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
 
                  rqres = expression({     # (Normalize quantile) residuals
                    uval <- ifelse(y == 0, nu * runif(length(y), 0, 1),
-                                  (1 - nu) * pZABS(y, mu, sigma, nu))
+                                  (1 - nu) * pZARBS(y, mu, sigma, nu))
                    rqres <- qnorm(uval)
                  }),
                  mu.initial = expression(mu <- mean(y[y>0])),
@@ -169,25 +168,24 @@ ZABS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
 }
 
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -200,36 +198,36 @@ ZABS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the zero adjusted Birnbaum-Saunders distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the zero adjusted Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
 #'
 #'@export
@@ -243,25 +241,24 @@ esp1 <- function(mu=1,sigma=1)
 }
 
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5,sigma = 1, nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -274,40 +271,41 @@ esp1 <- function(mu=1,sigma=1)
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-dZABS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
+dZARBS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
 {
   if (any(mu < 0) || any(is.na(mu)))  stop(paste("mu must be positive", "\n", ""))
   if (any(sigma < 0) || any(is.na(sigma)))  stop(paste("sigma must be positive", "\n", ""))
@@ -317,25 +315,24 @@ dZABS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
   fy
 }
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -348,40 +345,41 @@ dZABS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-pZABS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
+pZARBS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
 {
   if (any(mu < 0))  stop(paste("mu must be positive", "\n", ""))
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))
@@ -408,25 +406,24 @@ pZABS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
   cdf
 }
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -439,41 +436,41 @@ pZABS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-
-qZABS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
+qZARBS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
                    log.p = FALSE)
 {
   if (any(mu <= 0))
@@ -500,25 +497,24 @@ qZABS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
 }
 
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -531,40 +527,41 @@ qZABS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-rZABS <- function (n, mu = 0.5, sigma = 1, nu = 0.1)
+rZARBS <- function (n, mu = 0.5, sigma = 1, nu = 0.1)
 {
   if (any(mu <= 0))
     stop(paste("mu must be positive", "\n", ""))
@@ -576,30 +573,29 @@ rZABS <- function (n, mu = 0.5, sigma = 1, nu = 0.1)
     stop(paste("n must be a positive integer", "\n", ""))
   n <- ceiling(n)
   p <- runif(n)
-  r <- qZABS(p, mu = mu, sigma = sigma, nu = nu)
+  r <- qZARBS(p, mu = mu, sigma = sigma, nu = nu)
   r
 }
 
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -612,70 +608,70 @@ rZABS <- function (n, mu = 0.5, sigma = 1, nu = 0.1)
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-plotZABS = function (mu = .5, sigma = 1, nu = 0.1, from = 0, to = 0.999, n = 101, title="title",
+plotZARBS = function (mu = .5, sigma = 1, nu = 0.1, from = 0, to = 0.999, n = 101, title="title",
                      ...)
 {
   y <- seq(from = 0.001, to = to, length.out = n)
-  pdf <- dZABS(y, mu = mu, sigma = sigma, nu = nu)
-  pr0 <- c(dZABS(0, mu = mu, sigma = sigma, nu = nu))
+  pdf <- dZARBS(y, mu = mu, sigma = sigma, nu = nu)
+  pr0 <- c(dZARBS(0, mu = mu, sigma = sigma, nu = nu))
   po <- c(0)
   plot(pdf ~ y, main=title, ylim = c(0, max(pdf,pr0)), type = "l",lwd=3)
   points(po, pr0, type = "h",lwd=3)
   points(po, pr0, type = "p", col = "red",lwd=3)
 }
 
-#'Zero Adjusted Birnbaum-Saunders (ZABS) distribution for fitting a GAMLSS
+#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
-#'@description The fuction \code{ZABS()} defines the ZABS distribution, a two paramenter
+#'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
 #'function \code{gamlss()}. The zero adjusted Birnbaum-Saunders distribution is similar
 #'to the Birnbaum-Saunders distribution but allows zeros as y values. The extra parameter
-#'models the probabilities at zero. The functions dZABS, pZABS, qZABS and rZABS define
+#'models the probabilities at zero. The functions dZARBS, pZARBS, qZARBS and rZARBS define
 #'the density, distribution function, quantile function and random generation for
-#'the ZABS parameterization of the zero adjusted Birnbaum-Saunders distribution.
-#'plotZABS can be used to plot the distribution. meanZABS calculates the expected
+#'the ZARBS. plotZARBS can be used to plot the distribution. meanZARBS calculates the expected
 #'value of the response for a fitted model.
 #'
-#'@usage ZABS(mu.link = "identity", sigma.link = "identity")
-#'dZABS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-#'pZABS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'qZABS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-#'rZABS(n, mu = 1, sigma = 1)
-#'plotZABS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
-#'meanRBS(obj)
+#'@usage ZARBS(mu.link = "identity", sigma.link = "identity")
+#'dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
+#'pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
+#'rZARBS(n, mu = 1, sigma = 1)
+#'plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+#'meanZARBS(obj)
 #'
 #' @param mu.link object for which the extraction of model residuals is meaningful.
 #' @param sigma.link type of residual to be used.
@@ -688,42 +684,43 @@ plotZABS = function (mu = .5, sigma = 1, nu = 0.1, from = 0, to = 0.999, n = 101
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param from where to start plotting the distribution from
 #' @param to up to where to plot the distribution
-#' @param obj a fitted RBS object
+#' @param obj a fitted ZARBS object
 #' @param ... other graphical parameters for plotting
 #'
 #'
-#' @details  The parametrization of the normal distribution given in the function ZABS() is
+#' @details  The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distribution given in the function ZARBS() is
 #'
 #'\deqn{ f_{Y}(y;\mu,\delta,p) =\frac{[1-p]\sqrt{\delta+1}}{4\,y^{3/2}\,\sqrt{\pi\mu}}\left[y+\frac{\delta\mu}{\delta+1} \right]\exp\left(-\frac{\delta}{4}\left[\frac{y[\delta+1]}{\delta\mu}+\frac{\delta\mu}{y[\delta+1]}-2\right]\right) I_{(0, \infty)}(y)+  pI_{\{0\}}(y).}
 #'
 #'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
 #'
-#'@note For the function ZABS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'@note For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 #'
 #'@references
-#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2015) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
-#'\emph{Applied Stochastic Models in Business and Industry.} \email{10.1002/asmb.2124}.
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A., Barros, M. (2016) A methodology for stochastic inventory models based on a zero-adjusted Birnbaum-Saunders distribution.
+#'\emph{Applied Stochastic Models in Business and Industry.}, 32(1), 74--89. doi:\email{10.1002/asmb.2124}.
 #'
 #'@author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
 #'
 #'@examples plotZABS()
-#'dat <- rZABS(1000); hist(dat)
-#'fit <- gamlss(dat~1,family=ZABS(),method=CG())
+#'dat <- rZARBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=ZARBS(),method=CG())
 #'meanZABS(fit)
 #'
 #'data(papatoes);
-#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
+#'fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
 #'summary(fit)
 #'
 #'data(oil)
-#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZABS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+#'fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
 #'summary(fit1)
+#'
 #'@export
 #'
-meanZABS <- function (obj)
+meanZARBS <- function(obj)
 {
-  if (obj$family[1] != "ZABS")
+  if (obj$family[1] != "ZARBS")
     stop("the object do not have a ZABS distribution")
   meanofY <- (1 - fitted(obj, "nu")) * fitted(obj, "mu")
   meanofY
