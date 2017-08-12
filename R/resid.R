@@ -1,4 +1,4 @@
-#' Residuals
+#'Residuals
 #'
 #'@description \code{residuals} is a function which extracts model residuals from objects returned by modeling functions.
 #'@usage residuals(model,residual = "deviance")
@@ -13,6 +13,9 @@
 #'
 #'@references
 #'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A., Leiva, V., Barros, M. (2016) Reparameterized Birnbaum-Saunders
+#'regression models with varying precision. \emph{Electronic Journal of Statistics}, 10, 2825--2855. doi: \email{10.1214/16-EJS1187}.
 #'
 #'@examples
 #'##
@@ -29,6 +32,24 @@
 #'##Varying Precision
 #'fit1 <- gamlss(y1 ~ x21,sigma.formula = y1 ~x21, family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
 #'plot(fitted(fit1),residuals(fit1),xlab="fitted values",ylab="Deviance")
+#'
+#'
+#'data(Snacks,package="ssym")
+#'head(Snacks)
+#'attach(Snacks)
+#'type <- factor(type,labels = c("A","B","C","D","E"))
+#'w1 <- week
+#'w2 <- I(week^2)
+#'fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
+#'plotreg(fit., custom.model.names = "",custom.note = "CI")
+#'summary(fit.)
+#'plot(fit.$mu.fv,residuals(fit.,residual="deviance"),ylab="rd",xlab="m",pch=19,lwd=2,ylim=c(-4,4))
+#'abline(h=2,lwd=2,lty=2)
+#'abline(h=-2,lwd=2,lty=2)
+#'text(fit.$mu.fv[c(91)],residuals(fit.,residual="deviance")[c(91)]-.2,c(91))
+#'
+#'
+#'
 #'
 #'@export
 residuals <- function(model,residual = "deviance")
