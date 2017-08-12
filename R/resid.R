@@ -4,7 +4,7 @@
 #'@usage residuals(model,residual = "deviance")
 #'
 #' @param model an object for which the extraction of model residuals is meaningful.
-#' @param residual type of residual to be used.
+#' @param residual type of residual to be used ("pearson","score", "deviance" or "quantile"). Default is the deviance.
 #'
 #'@return Residuals extracted from the object object.
 #'
@@ -33,7 +33,8 @@
 #'fit1 <- gamlss(y1 ~ x21,sigma.formula = y1 ~x21, family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
 #'plot(fitted(fit1),residuals(fit1),xlab="fitted values",ylab="Deviance")
 #'
-#'
+#'library(texreg)
+#'library(ssym)
 #'data(Snacks,package="ssym")
 #'head(Snacks)
 #'attach(Snacks)
@@ -43,7 +44,7 @@
 #'fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
 #'plotreg(fit., custom.model.names = "",custom.note = "CI")
 #'summary(fit.)
-#'plot(fit.$mu.fv,residuals(fit.,residual="deviance"),ylab="rd",xlab="m",pch=19,lwd=2,ylim=c(-4,4))
+#'plot(fit.$mu.fv,residuals(fit.,residual="deviance"),ylab="Residuals",xlab="Fitted Values",pch=19,lwd=2,ylim=c(-4,4))
 #'abline(h=2,lwd=2,lty=2)
 #'abline(h=-2,lwd=2,lty=2)
 #'text(fit.$mu.fv[c(91)],residuals(fit.,residual="deviance")[c(91)]-.2,c(91))

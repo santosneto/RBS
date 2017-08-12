@@ -31,6 +31,43 @@ abline(h=2*mean(Cib),lty=2)
 Cia <- diag.bs(fit)$Ci.alpha
 plot(Cia,ylim=c(0,1),pch=19,ylab=expression(C[i](beta)),xlab="Index")
 abline(h=2*mean(Cia),lty=2)
+
+
+library(ssym)
+data(Snacks,package="ssym")
+head(Snacks)
+attach(Snacks)
+type <- factor(type,labels = c("A","B","C","D","E"))
+w1 <- week
+w2 <- I(week^2)
+fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
+summary(fit.)
+Cit <- diag.bs(fit.)$Ci.theta
+plot(week,Cit,pch=20,ylab="Ct",xlab="ind",ylim=c(0,0.1))
+abline(h=2*mean(Cit),lty=2)
+#text(c(91,76,136,465,750),Cit[c(91,76,136,465,750)]+0.005,c(91,76,136,465,750))
+identify(week,Cit,type,n=5) #91,76,136,465,750
+
+Cit <- diag.bs(fit.,scheme = "response")$Ci.theta
+plot(week,Cit,pch=20,ylab="Ct",xlab="Ind",ylim=c(0,0.1))
+abline(h=2*mean(Cit),lty=2)
+#text(c(91,76,136),Cit[c(91,76,136)]+0.005,c(91,76,136))
+identify(week,Cit,type,n=4) #91,76,136,465,750
+
+Cit <- diag.bs(fit.,scheme = "location",lx=6)$Ci.theta
+plot(week,Cit,pch=20,ylab="Ct",xlab="x",ylim=c(0,0.1))
+abline(h=2*mean(Cit),lty=2)
+#text(fit.$mu.x[,6][c(465,750)],Cit[c(465,750)]+0.005,c(465,750))
+identify(week,Cit,type,n=2) #91,76,136,465,750
+
+Cit <- diag.bs(fit.,scheme = "precision",lz=4)$Ci.theta
+plot(fit.$sigma.x[,4],Cit,pch=20,ylab="Ct",xlab="z",ylim=c(0,0.1))
+abline(h=2*mean(Cit),lty=2)
+text(fit.$sigma.x[,4][c(91,346)],Cit[c(91,346)]+0.003,c(91,346))
+
+
+
+
 }
 \author{
 Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
