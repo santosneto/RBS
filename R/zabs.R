@@ -1,4 +1,4 @@
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -163,7 +163,7 @@ ZARBS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
 }
 
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -239,7 +239,7 @@ esp1 <- function(mu=1,sigma=1)
 }
 
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -316,7 +316,7 @@ dZARBS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
   fy
 }
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -410,7 +410,7 @@ pZARBS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
   cdf
 }
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -501,7 +501,7 @@ qZARBS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
 }
 
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -585,7 +585,7 @@ rZARBS <- function (n, mu = 0.5, sigma = 1, nu = 0.1)
 }
 
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
@@ -665,7 +665,7 @@ plotZARBS = function (mu = .5, sigma = 1, nu = 0.1, from = 0, to = 0.999, n = 10
   points(po, pr0, type = "p", col = "red",lwd=3)
 }
 
-#'Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
+#'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
 #'@description The fuction \code{ZARBS()} defines the ZARBS distribution, a two paramenter
 #'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the

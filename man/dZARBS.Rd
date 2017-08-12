@@ -2,7 +2,7 @@
 % Please edit documentation in R/zabs.R
 \name{dZARBS}
 \alias{dZARBS}
-\title{Zero Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS}
+\title{Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS}
 \usage{
 ZARBS(mu.link = "identity", sigma.link = "identity")
 dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
