@@ -148,17 +148,16 @@ ZARBS <- function (mu.link = "log", sigma.link = "log", nu.link = "logit")
                    d2ldddv <- rep(0,length(y))
                    d2ldddv
                  },
-                  G.dev.incr = function(y, mu, sigma, nu, ...) -2 * dZARBS(y, mu, sigma, nu, log = TRUE), rqres = expression(rqres(pfun = "pZARBS",
-                                                                                                               type = "Mixed", mass.p = 0, prob.mp = nu, y = y,
-                                                                                                               mu = mu, sigma = sigma, nu = nu)),
-                 mu.initial = expression(mu <- mean(y[y>0])),
-                 sigma.initial = expression(sigma <- rep(1, length(y))),
-                 nu.initial = expression(nu <- rep(0.3, length(y))),
-                 mu.valid = function(mu) TRUE,
-                 sigma.valid = function(sigma) all(sigma > 0),
-                 nu.valid = function(nu) all(nu > 0) && all(nu < 1),
-                 y.valid = function(y) all(y >= 0)),
-            class = c("gamlss.family", "family"))
+                  G.dev.incr <- function(y, mu, sigma, nu, ...) -2 * dZARBS(y, mu, sigma, nu, log = TRUE),
+                 rqres <- expression(rqres(pfun = "pZARBS",type = "Mixed", mass.p = 0, prob.mp = nu,y = y,
+                 mu = mu, sigma = sigma, nu = nu)),
+                 mu.initial <- expression(mu <- (y + mean(y))/2),
+                 sigma.initial <- expression(sigma <- rep(1,length(y))),
+                 nu.initial <- expression(nu <- rep(0.5,length(y))),
+                 mu.valid <- function(mu) TRUE,
+                 sigma.valid <- function(sigma) all(sigma>0),
+                 nu.valid <- function(nu) all(nu > 0) && all(nu<1),
+                 y.valid <- function(y) all(y >= 0)),class <- c("gamlss.family", "family"))
 
 }
 
