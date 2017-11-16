@@ -234,7 +234,7 @@ esp1 <- function(mu=1,sigma=1)
   a <- sqrt(2/sigma)
   b <- (mu*sigma)/(sigma+1)
   E <- function(x)(1/((x+b)^2))*dcbs(x,alpha=a,beta=b)
-  return(integrate(E,0,Inf)$value)
+  return(integrate(E,0,Inf,stop.on.error = FALSE)$value)
 }
 
 
