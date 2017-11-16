@@ -451,6 +451,7 @@ dZARBS<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
 {
   if (any(mu < 0) || any(is.na(mu)))  stop(paste("mu must be positive", "\n", ""))
   if (any(sigma < 0) || any(is.na(sigma)))  stop(paste("sigma must be positive", "\n", ""))
+  if (any(nu <= 0) |  any(nu >= 1) )  stop(paste("nu must be between 0 and 1", "\n", ""))
   if (any(x < 0))  stop(paste("x must be positive", "\n", ""))
   log.lik <- ifelse(x==0, log(nu), log(1-nu) +  0.5*(sigma - log(mu) + log(sigma+1) - log(16*pi)) - (3/2)*log(x) - ((sigma+1)/(4*mu))*x - ((mu*sigma*sigma)/(4*(sigma+1)))*(1/x)  + log(x + ((mu*sigma)/(sigma+1))))
   if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
@@ -528,6 +529,7 @@ pZARBS <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
 {
   if (any(mu < 0))  stop(paste("mu must be positive", "\n", ""))
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))
+  if (any(nu <= 0) |  any(nu >= 1) )  stop(paste("nu must be between 0 and 1", "\n", ""))
   if (any(q < 0))  stop(paste("y must be positive", "\n", ""))
   a <- sqrt(2/sigma)
   b <- (mu*sigma)/(sigma+1)
@@ -620,10 +622,11 @@ qZARBS <- function (p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
 {
   if (any(mu <= 0))
     stop(paste("mu must be positive ", "\n", ""))
-  if (any(sigma < 0))  #In this parametrization  sigma = delta
+  if (any(sigma < 0))
     stop(paste("sigma must be positive", "\n", ""))
-  if (any(nu <= 0)|any(nu >= 1))  #In this parametrization  nu = p
+  if (any(nu <= 0)|any(nu >= 1))
     stop(paste("nu must be beetwen 0 and 1 ", "\n", ""))
+  if (any(p < 0) | any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))
 
   if (log.p == TRUE)
     p <- exp(p)
