@@ -122,7 +122,7 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
                  d2ldmdv = function(y) rep(0,length(y)),
                  d2ldddv = function(y) rep(0,length(y)),
                  G.dev.incr  = function(y,mu,sigma,nu,...)
-                   -2*dZAGA(y,mu,sigma,nu,log=TRUE),
+                   -2*dZARBS(y,mu,sigma,nu,log=TRUE),
                  rqres = expression(rqres(pfun="pZARBS", type="Mixed",  mass.p=0,
                                           prob.mp=nu, y=y, mu=mu, sigma=sigma, nu=nu)),
                  mu.initial =  expression(mu <- (y+mean(y))/2),
