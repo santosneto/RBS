@@ -69,7 +69,7 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
 {
   mstats <- checklink("mu.link", "ZARBS", substitute(mu.link), c("sqrt", "log", "identity","own"))
   dstats <- checklink("sigma.link", "ZARBS", substitute(sigma.link),c("sqrt", "log", "identity", "own"))
-  vstats <- checklink("nu.link", "ZARBS", substitute(nu.link),c("logit", "probit", "cloglog", "log", "own"))
+  vstats <- checklink("nu.link", "ZARBS", substitute(nu.link),c("logit", "probit", "cloglog", "own"))
   structure(
                  list(family = c("ZARBS", "Zero Adjusted RBS"),
                  parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE),
