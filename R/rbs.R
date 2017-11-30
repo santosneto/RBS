@@ -67,12 +67,12 @@
 #'@export
 #'
 
-RBS <- function (mu.link = "identity" , sigma.link="identity")
+RBS <- function (mu.link = "log" , sigma.link="log")
 {
   mstats = checklink("mu.link", "RBS", substitute(mu.link),c("sqrt","log","identity"))
   dstats = checklink("sigma.link", "RBS", substitute(sigma.link),c("sqrt", "log", "identity"))
 
-  structure(list(family = c("RBS"),
+  structure(list(family = c("RBS","Birnbaum-Saunders"),
                  parameters = list(mu=TRUE,sigma=TRUE),
                  nopar = 2,
                  type = "Continuous",
