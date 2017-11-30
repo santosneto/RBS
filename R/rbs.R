@@ -69,10 +69,11 @@
 
 RBS <- function (mu.link = "log" , sigma.link="log")
 {
-  mstats = checklink("mu.link", "RBS", substitute(mu.link),c("sqrt","log","identity"))
-  dstats = checklink("sigma.link", "RBS", substitute(sigma.link),c("sqrt", "log", "identity"))
-
-  structure(list(family = c("RBS","Reparameterized BS"),
+  mstats = checklink("mu.link", "BirnbaumSaunders", substitute(mu.link),
+                     c("sqrt","log","identity"))
+  dstats = checklink("sigma.link", "BirnbaumSaunders", substitute(sigma.link)
+                     ,c("sqrt", "log", "identity"))
+  structure(list(family = c("RBS","BirnbaumSaunders"),
                  parameters = list(mu=TRUE,sigma=TRUE),
                  nopar = 2,
                  type = "Continuous",
