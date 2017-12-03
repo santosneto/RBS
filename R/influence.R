@@ -440,7 +440,7 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
 #'@importFrom pracma hessian
 
 
-diag.zarbs <- function(model,links=c("log","identity","probit"),perturbation=c("cases","explanatory"))
+diag.zarbs <- function(model,links=c("log","identity","probit"))
 {
   x <- model$mu.x
   z <- model$sigma.x
@@ -514,8 +514,8 @@ diag.zarbs <- function(model,links=c("log","identity","probit"),perturbation=c("
 
   B4 <- matrix(0,p+q+s,p+q+s)
 
-  if(scheme=="case.weight")
-  {
+ # if(scheme=="case.weight")
+#  {
 
     mu <- model$mu.fv
     sigma <- model$sigma.fv
@@ -588,7 +588,7 @@ diag.zarbs <- function(model,links=c("log","identity","probit"),perturbation=c("
                    Ci.gamma = Cb.gamma,
                    Ci.theta = Cb.theta)
     return(result)
-  }
+ # }
 
   # if(scheme=="response")
   # {
