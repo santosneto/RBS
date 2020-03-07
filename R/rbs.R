@@ -430,8 +430,7 @@ RBS <- function (mu.link = "log" , sigma.link="log")
                  },
                  #the expected second derivative of the likelihood with respect to the location parameter mu
                  d2ldm2 = function(mu,sigma) {        #expected of second derivate of log-density respect to mu
-                   Ims = mapply(esp,mu,sigma)
-                   d2ldm2 =  - sigma/(2*mu*mu) - ((sigma/(sigma+1))^2)*Ims
+                   d2ldm2 =  - sigma/(2*mu*mu) - ((sigma/(sigma+1))^2)*Ims(mu,sigma)
                    d2ldm2
                  },
 
@@ -444,25 +443,19 @@ RBS <- function (mu.link = "log" , sigma.link="log")
                  },
                  #the expected second derivative of the likelihood with respect to the scale parameter sigma ok
                  d2ldd2 = function(mu,sigma) {      #expected of second derivate log-density respect to sigma
-                   Ims = mapply(esp,mu,sigma)
                    lss =  ((sigma^2) + (3*sigma) + 1)/(2*sigma*sigma*((sigma+1)^2))
-                   d2ldd2 = -lss - ((mu^2)/((sigma+1)^4))*Ims
+                   d2ldd2 = -lss - ((mu^2)/((sigma+1)^4))*Ims(mu,sigma)
                    d2ldd2
                  },
                  #the expected cross derivative of the likelihood with respect to both the location mu and scale parameter sigma
                  d2ldmdd = function(mu,sigma) {   #expected of partial derivate of log-density respect to mu and sigma
-                   Ims = mapply(esp,mu,sigma)
                    lms = 1/(2*mu*(sigma+1))
-                   d2ldmdd = - lms - ((mu*sigma)/((sigma+1)^3))*Ims
+                   d2ldmdd = - lms - ((mu*sigma)/((sigma+1)^3))*Ims(mu,sigma)
                    d2ldmdd
                  },
 
-
                  G.dev.incr = function(y,mu,sigma,...) -2*dRBS(y,mu,sigma,log=TRUE),
-
-                 rqres = expression(rqres(pfun = "pRBS",
-                                          type = "Continuous", y = y, mu = mu, sigma = sigma)),
-
+                 rqres = expression(rqres(pfun = "pRBS", type = "Continuous", y = y, mu = mu, sigma = sigma)),
                  mu.initial = expression({mu = mean(y)}),
                  sigma.initial = expression({sigma = rep(sigmatil(y),length(y))}),
                  mu.valid = function(mu) all(mu>0) ,
@@ -621,6 +614,9 @@ sigmatil=function(y)
 #'summary(model)
 #'@export
 #'
+#'
+Ims <- function(mu,sigma)
+{
 esp = function(mu=1,sigma=1)
 {
 
@@ -646,7 +642,10 @@ esp = function(mu=1,sigma=1)
   e = const(alpha,beta)*integral(alpha)
   return(e)
 }
+res <- mapply(esp, mu,sigma)
 
+res
+}
 #--------------------------------------------------------------------------------------------
 #'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
 #'
