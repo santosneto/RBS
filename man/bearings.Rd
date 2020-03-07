@@ -25,4 +25,3 @@ hist(bearings)
 McCool, J. I. (1974). Inferential techniques for Weibull populations. Aerospace Research Laboratories Report ARL TR74-0180, Wright-Patterson Air Force Base, Dayton, OH.
 }
 \keyword{datasets}
-

@@ -74,9 +74,6 @@ fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "
 summary(fit.)
 envelope(fit.,dist=RBS(mu.link="log",sigma.link = "log"),precision = "varying",color="white",xlabel = "perc",ylabel = "rd",border.col = "black")
 }
-\author{
-Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}
-}
 \references{
 Atkinson, A. C. (1985) Plots, transformations and regression : an introduction to graphical methods of diagnostic regression analysis. Oxford Science Publications, Oxford.
 
@@ -87,4 +84,6 @@ regression models with varying precision. \emph{Electronic Journal of Statistics
 
 Santos-Neto, M., Tomazella, V., Perreira, G.H., Nobre, J. (2017+) A general class of Birnbaum-Saunders regression models for data containing zeros.
 }
-
+\author{
+Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}
+}

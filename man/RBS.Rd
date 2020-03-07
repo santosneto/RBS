@@ -75,9 +75,6 @@ summary(model0)
 model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
 summary(model)
 }
-\author{
-Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-}
 \references{
 Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
 
@@ -85,4 +82,6 @@ Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameter
 
 Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
 }
-
+\author{
+Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+}

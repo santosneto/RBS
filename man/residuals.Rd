@@ -53,13 +53,12 @@ text(fit.$mu.fv[c(91)],residuals(fit.,residual="deviance")[c(91)]-.2,c(91))
 
 
 }
-\author{
-Manoel Santos-Neto \url{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \url{cysneiros@de.ufpe.br}, Victor Leiva \url{victorleivasanchez@gmail.com} and Michelli Barros \url{michelli.karinne@gmail.com}
-}
 \references{
 Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
 
 Santos-Neto, M., Cysneiros, F.J.A., Leiva, V., Barros, M. (2016) Reparameterized Birnbaum-Saunders
 regression models with varying precision. \emph{Electronic Journal of Statistics}, 10, 2825--2855. doi: \email{10.1214/16-EJS1187}.
 }
-
+\author{
+Manoel Santos-Neto \url{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \url{cysneiros@de.ufpe.br}, Victor Leiva \url{victorleivasanchez@gmail.com} and Michelli Barros \url{michelli.karinne@gmail.com}
+}

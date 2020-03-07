@@ -27,4 +27,3 @@ Rieck, J. R. and Nedelman, J. (1991). A Log-Linear Model for the Birnbaum-Saunde
 Brown, M. W. and Miller, K. J. (1978). Biaxial Fatigue Data. Report CEMR1/78. University of Sheffield, Dept. of Mechanical Engineering.
 }
 \keyword{datasets}
-

@@ -30,4 +30,3 @@ hist(psi21)
 Birnbaum, Z. W. and Saunders, S. C. (1969). Estimation for a family of life distributions with applications to fatigue. J. Appl. Probab. 6(2): 328-347.
 }
 \keyword{datasets}
-

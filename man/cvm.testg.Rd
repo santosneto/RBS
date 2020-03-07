@@ -35,9 +35,6 @@ cdf <- function(x) pRBS(x,mu,sigma)
 ad.testg(x,cdf)
 cvm.testg(x,cdf)
 }
-\author{
-Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-}
 \references{
 Stephens, M.A. (1986): Tests based on EDF statistics. In: D'Agostino, R.B. and Stephens, M.A., eds.: Goodness-of-Fit Techniques. Marcel Dekker, New York.
 
@@ -47,4 +44,6 @@ Chen, G., Balakrishnan, N. (1995) A general purpose approximate goodness-of-fit 
 
 Barros, M., Leiva, V., Ospina, R. ; Tsuyuguchi, A.B. (2014) Goodness-of-fit tests based on the Birnbaum-Saunders distribution for censored reliability data analysis. \emph{IEEE Transactions on Reliability}, v. 63, p. 543/554.
 }
-
+\author{
+Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+}

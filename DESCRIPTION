@@ -13,9 +13,10 @@ Depends:
     gamlss.nl
 License: GNU GPL v2
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 7.0.2
 Imports:
     gamlss,
     pracma,
     nortest,
     gamlss.nl
+Encoding: UTF-8
