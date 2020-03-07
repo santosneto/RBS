@@ -84,6 +84,76 @@ dcbs <- function(x, alpha = 1, beta = 1, log = FALSE){
 }
 
 #--------------------------------------------------------------------------------------------
+#'The Classical Birnbaum-Saunders (BS) distribution
+#'
+#'@description Density, distribution function, quantile function and random generation
+#'for the normal distribution with mean equal to \code{alpha} and standard deviation equal to \code{beta}.
+#'
+#'@usage dcbs(x, alpha = 1, beta = 1, log = FALSE)
+#'pcbs(q, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'qcbs(p, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'rcbs(n, alpha = 1, beta = 1)
+
+#'
+#' @param x,q vector of quantiles
+#' @param alpha vector of scale parameter values
+#' @param beta vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#'
+#'
+#'
+#' @details  Birnbaum and Saunders (1969) proposed the two-parameter Birnbaum-Saunders
+#' distribution with density
+#' \deqn{
+#'  f_{T}(t) = \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2\alpha^{2}}
+#'                                             \left(\frac{t}{\beta}+\frac{\beta}{t}-2\right) \right]
+#'  \frac{t^{-\frac{3}{2}} (t+\beta)}{2\alpha\sqrt{\beta}}; \ t>0,
+#'  \alpha > 0, \beta > 0,}
+#'as a failure time distribution for fatigue failure caused under cyclic loading. The parameters
+#'alpha and beta are the shape and the scale parameters, respectively. In their derivation,
+#'it was assumed that the failure is due to the development and growth of a
+#' dominant crack.
+#'
+#'@return \code{dcbs} gives the density, \code{pcbs} gives the distribution function,
+#'\code{qcbs} gives the quantile function, and \code{rcbs} generates random deviates.
+#'
+#'@references
+#'Birnbaum, Z. W. and Saunders, S. C. (1969). A new family of life distributions. J. Appl. Probab. 6(2): 637-652.
+#'
+#'Chang D. S. and Tang, L. C. (1994). Random number generator for the Birnbaum-Saunders distribution. Computational and Industrial Engineering, 27(1-4):345-348.
+#'
+#'Leiva, V., Sanhueza, A., Sen, P. K., and Paula, G. A. (2006). Random number generators for the generalized Birnbaum-Saunders distribution. Submitted to Publication.
+#'
+#'Rieck, J. R. (2003). A comparison of two random number generators for the Birnbaum-Saunders distribution. Communications in Statistics - Theory and Methods, 32(5):929-934.
+#'
+#'@author
+#'Víctor Leiva \email{victor.leiva@uv.cl}, Hugo Hernández \email{hugo.hernande@msn.com}, and Marco Riquelme \email{mriquelm@ucm.cl}.
+#'
+#'@examples
+#'
+#'## density for the Birnbaum-Saunders distribution
+#'## with parameters alpha=0.5 y beta=1.0 in x=3.
+#'dcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## cdf for the Birnbaum-Saunders distribution
+#' ## with parameters alpha=0.5 y beta=1.0 in x=3.
+#' pcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## quantil function for p=0.5 in the Birnbaum-Saunders distribution
+## with parameters alpha=0.5 y beta=1.0.
+#' qcbs(0.5,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#'## Examples for simulations
+#'rcbs(n=6,alpha=0.5,beta=1.0)
+#'sample<-rcbs(n=100,alpha=0.5,beta=1.0)
+#'## Higtogram for sample
+#'hist(sample)
+#'@export
+#'
+
 pcbs <- function(q, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE){
   if(!is.numeric(q)||!is.numeric(alpha)||!is.numeric(beta)){
     stop("non-numeric argument to mathematical function")}
@@ -99,6 +169,75 @@ pcbs <- function(q, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE){
 }
 
 #--------------------------------------------------------------------------------------------
+#'The Classical Birnbaum-Saunders (BS) distribution
+#'
+#'@description Density, distribution function, quantile function and random generation
+#'for the normal distribution with mean equal to \code{alpha} and standard deviation equal to \code{beta}.
+#'
+#'@usage dcbs(x, alpha = 1, beta = 1, log = FALSE)
+#'pcbs(q, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'qcbs(p, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'rcbs(n, alpha = 1, beta = 1)
+
+#'
+#' @param x,q vector of quantiles
+#' @param alpha vector of scale parameter values
+#' @param beta vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#'
+#'
+#'
+#' @details  Birnbaum and Saunders (1969) proposed the two-parameter Birnbaum-Saunders
+#' distribution with density
+#' \deqn{
+#'  f_{T}(t) = \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2\alpha^{2}}
+#'                                             \left(\frac{t}{\beta}+\frac{\beta}{t}-2\right) \right]
+#'  \frac{t^{-\frac{3}{2}} (t+\beta)}{2\alpha\sqrt{\beta}}; \ t>0,
+#'  \alpha > 0, \beta > 0,}
+#'as a failure time distribution for fatigue failure caused under cyclic loading. The parameters
+#'alpha and beta are the shape and the scale parameters, respectively. In their derivation,
+#'it was assumed that the failure is due to the development and growth of a
+#' dominant crack.
+#'
+#'@return \code{dcbs} gives the density, \code{pcbs} gives the distribution function,
+#'\code{qcbs} gives the quantile function, and \code{rcbs} generates random deviates.
+#'
+#'@references
+#'Birnbaum, Z. W. and Saunders, S. C. (1969). A new family of life distributions. J. Appl. Probab. 6(2): 637-652.
+#'
+#'Chang D. S. and Tang, L. C. (1994). Random number generator for the Birnbaum-Saunders distribution. Computational and Industrial Engineering, 27(1-4):345-348.
+#'
+#'Leiva, V., Sanhueza, A., Sen, P. K., and Paula, G. A. (2006). Random number generators for the generalized Birnbaum-Saunders distribution. Submitted to Publication.
+#'
+#'Rieck, J. R. (2003). A comparison of two random number generators for the Birnbaum-Saunders distribution. Communications in Statistics - Theory and Methods, 32(5):929-934.
+#'
+#'@author
+#'Víctor Leiva \email{victor.leiva@uv.cl}, Hugo Hernández \email{hugo.hernande@msn.com}, and Marco Riquelme \email{mriquelm@ucm.cl}.
+#'
+#'@examples
+#'
+#'## density for the Birnbaum-Saunders distribution
+#'## with parameters alpha=0.5 y beta=1.0 in x=3.
+#'dcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## cdf for the Birnbaum-Saunders distribution
+#' ## with parameters alpha=0.5 y beta=1.0 in x=3.
+#' pcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## quantil function for p=0.5 in the Birnbaum-Saunders distribution
+## with parameters alpha=0.5 y beta=1.0.
+#' qcbs(0.5,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#'## Examples for simulations
+#'rcbs(n=6,alpha=0.5,beta=1.0)
+#'sample<-rcbs(n=100,alpha=0.5,beta=1.0)
+#'## Higtogram for sample
+#'hist(sample)
+#'@export
+#'
 qcbs <- function(p, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE){
   if (alpha <= 0){stop("alpha must be positive")}
   if (beta <= 0){stop("beta must be positive")}
@@ -111,6 +250,75 @@ qcbs <- function(p, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE){
 }
 
 #--------------------------------------------------------------------------------------------
+#'The Classical Birnbaum-Saunders (BS) distribution
+#'
+#'@description Density, distribution function, quantile function and random generation
+#'for the normal distribution with mean equal to \code{alpha} and standard deviation equal to \code{beta}.
+#'
+#'@usage dcbs(x, alpha = 1, beta = 1, log = FALSE)
+#'pcbs(q, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'qcbs(p, alpha = 1, beta = 1, lower.tail = TRUE, log.p = FALSE)
+#'rcbs(n, alpha = 1, beta = 1)
+
+#'
+#' @param x,q vector of quantiles
+#' @param alpha vector of scale parameter values
+#' @param beta vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#'
+#'
+#'
+#' @details  Birnbaum and Saunders (1969) proposed the two-parameter Birnbaum-Saunders
+#' distribution with density
+#' \deqn{
+#'  f_{T}(t) = \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2\alpha^{2}}
+#'                                             \left(\frac{t}{\beta}+\frac{\beta}{t}-2\right) \right]
+#'  \frac{t^{-\frac{3}{2}} (t+\beta)}{2\alpha\sqrt{\beta}}; \ t>0,
+#'  \alpha > 0, \beta > 0,}
+#'as a failure time distribution for fatigue failure caused under cyclic loading. The parameters
+#'alpha and beta are the shape and the scale parameters, respectively. In their derivation,
+#'it was assumed that the failure is due to the development and growth of a
+#' dominant crack.
+#'
+#'@return \code{dcbs} gives the density, \code{pcbs} gives the distribution function,
+#'\code{qcbs} gives the quantile function, and \code{rcbs} generates random deviates.
+#'
+#'@references
+#'Birnbaum, Z. W. and Saunders, S. C. (1969). A new family of life distributions. J. Appl. Probab. 6(2): 637-652.
+#'
+#'Chang D. S. and Tang, L. C. (1994). Random number generator for the Birnbaum-Saunders distribution. Computational and Industrial Engineering, 27(1-4):345-348.
+#'
+#'Leiva, V., Sanhueza, A., Sen, P. K., and Paula, G. A. (2006). Random number generators for the generalized Birnbaum-Saunders distribution. Submitted to Publication.
+#'
+#'Rieck, J. R. (2003). A comparison of two random number generators for the Birnbaum-Saunders distribution. Communications in Statistics - Theory and Methods, 32(5):929-934.
+#'
+#'@author
+#'Víctor Leiva \email{victor.leiva@uv.cl}, Hugo Hernández \email{hugo.hernande@msn.com}, and Marco Riquelme \email{mriquelm@ucm.cl}.
+#'
+#'@examples
+#'
+#'## density for the Birnbaum-Saunders distribution
+#'## with parameters alpha=0.5 y beta=1.0 in x=3.
+#'dcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## cdf for the Birnbaum-Saunders distribution
+#' ## with parameters alpha=0.5 y beta=1.0 in x=3.
+#' pcbs(3,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#' ## quantil function for p=0.5 in the Birnbaum-Saunders distribution
+## with parameters alpha=0.5 y beta=1.0.
+#' qcbs(0.5,alpha=0.5,beta=1.0,log=FALSE)
+#'
+#'## Examples for simulations
+#'rcbs(n=6,alpha=0.5,beta=1.0)
+#'sample<-rcbs(n=100,alpha=0.5,beta=1.0)
+#'## Higtogram for sample
+#'hist(sample)
+#'@export
+#'
 rcbs <- function(n, alpha = 1, beta = 1)
 {
   if (!is.numeric(n)||!is.numeric(alpha)||!is.numeric(beta))
@@ -266,6 +474,74 @@ RBS <- function (mu.link = "log" , sigma.link="log")
 
 
 #--------------------------------------------------------------------------------------------
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 sigmatil=function(y)
 {
   s = mean(y)
@@ -276,6 +552,74 @@ sigmatil=function(y)
 }
 
 #--------------------------------------------------------------------------------------------
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 esp = function(mu=1,sigma=1)
 {
 
@@ -303,6 +647,74 @@ esp = function(mu=1,sigma=1)
 }
 
 #--------------------------------------------------------------------------------------------
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 resrbs=function(y,mu,sigma)
 {
   Ims = mapply(esp,mu,sigma)
@@ -314,8 +726,74 @@ resrbs=function(y,mu,sigma)
 
 
 #--------------------------------------------------------------------------------------------
-
-
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 dRBS<-function(x, mu=1, sigma=1, log=FALSE)
 {
   if (any(mu < 0))  stop(paste("mu must be positive", "\n", ""))
@@ -327,6 +805,74 @@ dRBS<-function(x, mu=1, sigma=1, log=FALSE)
 }
 
 #--------------------------------------------------------------------------------------------
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 pRBS <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
 {       if (any(mu < 0))  stop(paste("mu must be positive", "\n", ""))
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))
@@ -354,6 +900,74 @@ pRBS <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
 }
 
 #--------------------------------------------------------------------------------------------
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 qRBS = function (p, mu = 0.5, sigma = 1, lower.tail = TRUE,
                  log.p = FALSE)
 {
@@ -381,7 +995,74 @@ qRBS = function (p, mu = 0.5, sigma = 1, lower.tail = TRUE,
 
 
 #--------------------------------------------------------------------------------------------
-
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 
 rRBS = function(n, mu=1, sigma=1)
 {
@@ -394,7 +1075,74 @@ rRBS = function(n, mu=1, sigma=1)
 
 
 #--------------------------------------------------------------------------------------------
-
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 plotRBS = function(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, title="title", ...)
 {
   y = seq(from = 0.001, to = to, length.out = n)
@@ -404,7 +1152,74 @@ plotRBS = function(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, title="tit
 }
 
 #--------------------------------------------------------------------------------------------
-
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 
 meanRBS = function (obj)
 {
@@ -416,7 +1231,74 @@ meanRBS = function (obj)
 
 
 #--------------------------------------------------------------------------------------------
-
+#'Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS
+#'
+#'@description The fuction \code{RBS()} defines the BS distribution, a two paramenter
+#'distribution, for a gamlss.family object to be used in GAMLSS fitting using using the
+#'function \code{gamlss()}, with mean equal to the parameter \code{mu} and \code{sigma}
+#'equal the precision parameter. The functions \code{dRBS}, \code{pRBS}, \code{qRBS} and
+#'\code{rBS} define the density, distribution function, quantile function and random
+#'genetation for the \code{RBS} parameterization of the RBS distribution.
+#'
+#'@usage RBS(mu.link = "identity", sigma.link = "identity")
+#'dRBS(x, mu = 1, sigma = 1, log = FALSE)
+#'pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+#'rRBS(n, mu = 1, sigma = 1)
+#'plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+#'meanRBS(obj)
+#'
+#' @param mu.link object for which the extraction of model residuals is meaningful.
+#' @param sigma.link type of residual to be used.
+#' @param x,q vector of quantiles
+#' @param mu vector of scale parameter values
+#' @param sigma vector of shape parameter values
+#' @param log, log.p logical; if TRUE, probabilities p are given as log(p).
+#' @param lower.tail logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]
+#' @param p vector of probabilities.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
+#' @param from where to start plotting the distribution from
+#' @param to up to where to plot the distribution
+#' @param obj a fitted RBS object
+#' @param ... other graphical parameters for plotting
+#'
+#'
+#' @details  The parametrization of the normal distribution given in the function RBS() is
+#'
+#' \deqn{f_{Y}(y;\mu,\sigma)=\frac{\exp\left(\sigma/2\right)\sqrt{\sigma+1}}{4\sqrt{\pi\mu}\,y^{3/2}}
+#'\left[y+\frac{\sigma \mu}{\sigma+1}\right] \exp\left(-\frac{\sigma}{4}
+#'                                                     \left[\frac{y\{\sigma+1\}}{\sigma\mu}+\frac{\sigma\mu}{y\{\sigma+1\}}\right]\right) y>0.}
+#'
+#'@return returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
+#'
+#'@note For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
+#'
+#'@references
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.
+#'
+#'Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2014) On a reparameterized Birnbaum-Saunders distribution and its moments, estimation and application. \emph{Revstat Statistical Journal}, v. 12, p. 247-272, 2014.
+#'
+#'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
+#'
+#'@author
+#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
+#'
+#'
+#'@examples plotRBS()
+#'dat <- rRBS(1000); hist(dat)
+#'fit <- gamlss(dat~1,family=RBS(),method=CG())
+#'meanRBS(fit)
+#'
+#' ##install.packages(faraway)
+#'library(faraway)
+#'data(cpd)
+#'attach(cpd)
+#'model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model0)
+#'model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+#'summary(model)
+#'@export
+#'
 
 est.rbs <- function(x,xi=0.95)
 {
