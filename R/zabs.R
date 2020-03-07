@@ -95,8 +95,7 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
                    dldm
                  },
                  d2ldm2 = function(y,mu,sigma) {
-                   Ims = mapply(esp,mu,sigma)
-                   d2ldm2 = ifelse((y == 0) , 0, - sigma/(2*mu*mu) - ((sigma/(sigma+1))^2)*Ims )
+                   d2ldm2 = ifelse((y == 0) , 0, - sigma/(2*mu*mu) - ((sigma/(sigma+1))^2)*Ims(mu,sigma) )
                    d2ldm2
                  },
                  dldd = function(y,mu,sigma) {   #first derivate log-density respect to sigma
@@ -106,15 +105,13 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
                    dldd
                  },
                  d2ldd2 = function(y,mu,sigma) {
-                   Ims = mapply(esp,mu,sigma)
                    lss =  ((sigma^2) + 3*sigma + 1)/(2*((sigma+1)^2)*(sigma^2))
-                   d2ldd2 <- ifelse((y==0),0, -lss - ((mu^2)/((sigma+1)^4))*Ims)
+                   d2ldd2 <- ifelse((y==0),0, -lss - ((mu^2)/((sigma+1)^4))*Ims(mu,sigma) )
                    d2ldd2
                  },
                  d2ldmdd = function(y,mu,sigma) {
-                   Ims = mapply(esp,mu,sigma)
                    lms = 1/(2*mu*(sigma+1))
-                   d2ldmdd <- ifelse((y == 0), 0, - lms - ((mu*sigma)/((sigma+1)^3))*Ims )
+                   d2ldmdd <- ifelse((y == 0), 0, - lms - ((mu*sigma)/((sigma+1)^3))*Ims(mu,sigma) )
                    d2ldmdd
                  },
                  dldv = function(y,nu) ifelse(y == 0, 1/nu, -1/(1 - nu)),
@@ -206,32 +203,37 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
 #'
 #'@export
 #'
-esp = function(mu=1,sigma=1)
+Ims <- function(mu,sigma)
 {
-
-  integral=function(aest)
+  esp = function(mu=1,sigma=1)
   {
-    fu=function(u)
+
+    integral=function(aest)
     {
-      w1 = (1 / ((1 +u^2)*(u^2)))
-      w2 = (exp((-1 /(2*aest^2) )*((u - 1/u)^2)))
-      (w1*w2)
+      fu=function(u)
+      {
+        w1 = (1 / ((1 +u^2)*(u^2)))
+        w2 = (exp((-1 /(2*aest^2) )*((u - 1/u)^2)))
+        (w1*w2)
+      }
+      return(integrate(fu,0,Inf)$value)
     }
-    return(integrate(fu,0,Inf)$value)
-  }
 
-  const = function(alpha,beta)
-  {
-    const = 1/(alpha*beta*beta*sqrt(2*pi))
-    return(const)
-  }
+    const = function(alpha,beta)
+    {
+      const = 1/(alpha*beta*beta*sqrt(2*pi))
+      return(const)
+    }
 
-  alpha = sqrt(2/sigma)
-  beta = (mu*sigma)/(sigma+1)
-  e = const(alpha,beta)*integral(alpha)
-  return(e)
+    alpha = sqrt(2/sigma)
+    beta = (mu*sigma)/(sigma+1)
+    e = const(alpha,beta)*integral(alpha)
+    return(e)
+  }
+  res <- mapply(esp, mu,sigma)
+
+  res
 }
-
 
 #'Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS
 #'
