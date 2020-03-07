@@ -460,7 +460,8 @@ RBS <- function (mu.link = "log" , sigma.link="log")
 
                  G.dev.incr = function(y,mu,sigma,...) -2*dRBS(y,mu,sigma,log=TRUE),
 
-                 rqres = expression(resrbs(y=y,mu=mu,sigma=sigma)),
+                 rqres = expression(rqres(pfun = "pRBS",
+                                          type = "Continuous", y = y, mu = mu, sigma = sigma)),
 
                  mu.initial = expression({mu = mean(y)}),
                  sigma.initial = expression({sigma = rep(sigmatil(y),length(y))}),
