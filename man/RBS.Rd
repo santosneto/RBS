@@ -2,28 +2,60 @@
 % Please edit documentation in R/rbs.R
 \name{RBS}
 \alias{RBS}
+\alias{dRBS}
+\alias{pRBS}
+\alias{qRBS}
+\alias{rRBS}
+\alias{plotRBS}
+\alias{meanRBS}
+\alias{sigmatil}
+\alias{resrbs}
+\alias{est.rbs}
+\alias{Ims}
 \title{Reparameterized Birnbaum-Saunders (RBS) distribution for fitting a GAMLSS}
 \usage{
-RBS(mu.link = "identity", sigma.link = "identity")
+RBS(mu.link = "log", sigma.link = "log")
+
+sigmatil(y)
+
+Ims(mu, sigma)
+
+resrbs(y, mu, sigma)
+
 dRBS(x, mu = 1, sigma = 1, log = FALSE)
+
 pRBS(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
-qRBS(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+
+qRBS(p, mu = 0.5, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+
 rRBS(n, mu = 1, sigma = 1)
-plotRBS(mu = .5, sigma = 1, from = 0, to = 0.999, n = 101, ...)
+
+plotRBS(
+  mu = 0.5,
+  sigma = 1,
+  from = 0,
+  to = 0.999,
+  n = 101,
+  title = "title",
+  ...
+)
+
 meanRBS(obj)
+
+est.rbs(x, xi = 0.95)
 }
 \arguments{
 \item{mu.link}{object for which the extraction of model residuals is meaningful.}
 
 \item{sigma.link}{type of residual to be used.}
 
-\item{x, q}{vector of quantiles}
-
 \item{mu}{vector of scale parameter values}
 
 \item{sigma}{vector of shape parameter values}
 
-\item{log, }{log.p logical; if TRUE, probabilities p are given as log(p).}
+\item{x, y, q}{vector of quantiles}
+
+\item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]}
 
@@ -31,13 +63,17 @@ meanRBS(obj)
 
 \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required.}
 
-\item{from}{where to start plotting the distribution from}
+\item{from}{where to start plotting the distribution from.}
 
-\item{to}{up to where to plot the distribution}
+\item{to}{up to where to plot the distribution.}
 
-\item{obj}{a fitted RBS object}
+\item{title}{title of the plot.}
 
-\item{...}{other graphical parameters for plotting}
+\item{...}{other graphical parameters for plotting.}
+
+\item{obj}{a fitted RBS object,}
+
+\item{xi}{the confidence level.}
 }
 \value{
 returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
@@ -61,19 +97,13 @@ The parametrization of the normal distribution given in the function RBS() is
 For the function RBS(), mu is the mean and sigma is the precision parameter of the Birnbaum-Saunders distribution.
 }
 \examples{
-plotRBS()
-dat <- rRBS(1000); hist(dat)
-fit <- gamlss(dat~1,family=RBS(),method=CG())
-meanRBS(fit)
-
-##install.packages(faraway)
-library(faraway)
-data(cpd)
+data(cpd,package='faraway')
 attach(cpd)
-model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
+model0 = gamlss::gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
 summary(model0)
-model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
+model = gamlss::gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
 summary(model)
+
 }
 \references{
 Santos-Neto, M., Cysneiros, F.J.A, Leiva, V., Barros, M. (2012) On new parameterizations of the Birnbaum-Saunders distribution. \emph{PAK J STAT}, v. 28, p. 1-26, 2012.

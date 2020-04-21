@@ -1,10 +1,18 @@
-#' Diagnostic Analysis - Local Influnce
-#' @description Diagnostics for the RBS model
+#'@name diag.RBS
 #'
-#'@usage diag.bs(model)
+#'@aliases diag.RBS
 #'
-#'@param model object of class \code{gamlss} holding the fitted model.
+#'@title Diagnostic Analysis - Local Influnce
+#'
+#'@description Diagnostics for the RBS model
+#'
+#'@param model Object of class \code{gamlss} holding the fitted model.
 #'@param scheme Default is "case.weight". But, can be "response", "location" or "precision".
+#'@param mu.link  Defines the mu.link, with "identity" link as the default for the mu parameter.
+#'@param sigma.link Defines the sigma.link, with "identity" link as the default for the sigma parameter
+#'@param lx Used in the scheme 'location'.
+#'@param lz Used in the scheme 'precision'.
+#'
 #'@return Local influence measures.
 #'
 #' @author
@@ -14,60 +22,23 @@
 #'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
 #'
 #'@examples
-#'library(faraway)
-#'data(cpd)
+#'data(cpd,package='faraway')
 #'attach(cpd)
-#'fit = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
-#'summary(fit)
-#'set.seed(2015)
-#'envelope(fit,precision="fixed")
-#'Cib <- diag.bs(fit)$Ci.beta
+#'fit = gamlss::gamlss(actual ~ 0+projected,
+#'family=RBS(mu.link="identity",sigma.link="identity"),method=CG())
+#'Cib <- diag.RBS(fit)$Ci.beta
 #'plot(Cib,ylim=c(0,1),pch=19,ylab=expression(C[i](beta)),xlab="Index")
 #'abline(h=2*mean(Cib),lty=2)
-#'Cia <- diag.bs(fit)$Ci.alpha
+#'Cia <- diag.RBS(fit)$Ci.alpha
 #'plot(Cia,ylim=c(0,1),pch=19,ylab=expression(C[i](beta)),xlab="Index")
 #'abline(h=2*mean(Cia),lty=2)
 #'
 #'
-#'library(ssym)
-#'data(Snacks,package="ssym")
-#'head(Snacks)
-#'attach(Snacks)
-#'type <- factor(type,labels = c("A","B","C","D","E"))
-#'w1 <- week
-#'w2 <- I(week^2)
-#'fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
-#'summary(fit.)
-#'Cit <- diag.bs(fit.)$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="ind",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(c(91,76,136,465,750),Cit[c(91,76,136,465,750)]+0.005,c(91,76,136,465,750))
-#'identify(week,Cit,type,n=5) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "response")$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="Ind",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(c(91,76,136),Cit[c(91,76,136)]+0.005,c(91,76,136))
-#'identify(week,Cit,type,n=4) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "location",lx=6)$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="x",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(fit.$mu.x[,6][c(465,750)],Cit[c(465,750)]+0.005,c(465,750))
-#'identify(week,Cit,type,n=2) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "precision",lz=4)$Ci.theta
-#'plot(fit.$sigma.x[,4],Cit,pch=20,ylab="Ct",xlab="z",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'text(fit.$sigma.x[,4][c(91,346)],Cit[c(91,346)]+0.003,c(91,346))
-#'
-#'
-#'
-#'
+#'@importFrom pracma hessian ones
+#'@importFrom stats make.link sd
 #'@export
 
-#'@importFrom pracma hessian
-diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case.weight",lx=NULL,lz=NULL)
+diag.RBS=function(model,mu.link = "identity",sigma.link = "identity",scheme="case.weight",lx=NULL,lz=NULL)
 {
 
   x <- model$mu.x
@@ -368,15 +339,18 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
 
   }
 
-
-#' Diagnostic Analysis - Local Influnce
-#' @description Diagnostics for the RBS model
+#'@name diag.ZARBS
 #'
-#'@usage diag.bs(model)
+#'
+#'@aliases dias.ZARBS
+#'
+#'
+#'@title Diagnostic Analysis - Local Influence
+#'
+#'@description Diagnostics for the ZARBS model
 #'
 #'@param model object of class \code{gamlss} holding the fitted model.
-#'@param scheme Default is "case.weight". But, can be "response", "location" or "precision".
-#'@return Local influence measures.
+#'@param links link function used.
 #'
 #' @author
 #'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
@@ -384,63 +358,10 @@ diag.bs=function(model,mu.link = "identity",sigma.link = "identity",scheme="case
 #'@references
 #'Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
 #'
-#'@examples
-#'library(faraway)
-#'data(cpd)
-#'attach(cpd)
-#'fit = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
-#'summary(fit)
-#'set.seed(2015)
-#'envelope(fit,precision="fixed")
-#'Cib <- diag.bs(fit)$Ci.beta
-#'plot(Cib,ylim=c(0,1),pch=19,ylab=expression(C[i](beta)),xlab="Index")
-#'abline(h=2*mean(Cib),lty=2)
-#'Cia <- diag.bs(fit)$Ci.alpha
-#'plot(Cia,ylim=c(0,1),pch=19,ylab=expression(C[i](beta)),xlab="Index")
-#'abline(h=2*mean(Cia),lty=2)
-#'
-#'
-#'library(ssym)
-#'data(Snacks,package="ssym")
-#'head(Snacks)
-#'attach(Snacks)
-#'type <- factor(type,labels = c("A","B","C","D","E"))
-#'w1 <- week
-#'w2 <- I(week^2)
-#'fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
-#'summary(fit.)
-#'Cit <- diag.bs(fit.)$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="ind",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(c(91,76,136,465,750),Cit[c(91,76,136,465,750)]+0.005,c(91,76,136,465,750))
-#'identify(week,Cit,type,n=5) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "response")$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="Ind",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(c(91,76,136),Cit[c(91,76,136)]+0.005,c(91,76,136))
-#'identify(week,Cit,type,n=4) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "location",lx=6)$Ci.theta
-#'plot(week,Cit,pch=20,ylab="Ct",xlab="x",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'#text(fit.$mu.x[,6][c(465,750)],Cit[c(465,750)]+0.005,c(465,750))
-#'identify(week,Cit,type,n=2) #91,76,136,465,750
-#'
-#'Cit <- diag.bs(fit.,scheme = "precision",lz=4)$Ci.theta
-#'plot(fit.$sigma.x[,4],Cit,pch=20,ylab="Ct",xlab="z",ylim=c(0,0.1))
-#'abline(h=2*mean(Cit),lty=2)
-#'text(fit.$sigma.x[,4][c(91,346)],Cit[c(91,346)]+0.003,c(91,346))
-#'
-#'
-#'
-#'
 #'@export
-
 #'@importFrom pracma hessian
 
-
-diag.zarbs <- function(model,links=c("log","identity","probit"))
+diag.ZARBS <- function(model,links=c("log","identity","probit"))
 {
   x <- model$mu.x
   z <- model$sigma.x
@@ -502,7 +423,7 @@ diag.zarbs <- function(model,links=c("log","identity","probit"))
   LgaMMa <- h0[(p+q+1):(p+q+s),(p+q+1):(p+q+s)]
 
   B1 <- matrix(0,p+q+s,p+q+s)
-  B1[(p+q),(p+q)] <- -solve(Lalpha)
+  B1[(p+q):(p+q+s-1),(p+q):(p+q+s-1)] <- -solve(Lalpha)
   B1[(p+q+1):(p+q+s),(p+q+1):(p+q+s)] <- -solve(LgaMMa)
 
   B2 <- matrix(0,p+q+s,p+q+s)
@@ -514,136 +435,79 @@ diag.zarbs <- function(model,links=c("log","identity","probit"))
 
   B4 <- matrix(0,p+q+s,p+q+s)
 
- # if(scheme=="case.weight")
-#  {
-
-    mu <- model$mu.fv
-    sigma <- model$sigma.fv
-    nu <- model$nu.fv
-    ki <- (1-(y==0))
-    eta <- linkfun(mu)
-    tau <- sigma_linkfun(sigma)
-    xi <- nu_linkfun(nu)
-    ai <- mu.eta(eta)
-    bi <- sigma_mu.eta(tau)
-    ci <- nu_mu.eta(tau)
+  mu <- model$mu.fv
+  sigma <- model$sigma.fv
+  nu <- model$nu.fv
+  ki <- (1-(y==0))
+  eta <- linkfun(mu)
+  tau <- sigma_linkfun(sigma)
+  xi <- nu_linkfun(nu)
+  ai <- mu.eta(eta)
+  bi <- sigma_mu.eta(tau)
+  ci <- nu_mu.eta(tau)
 
 
-    dmu <- ifelse(y>0,(-1/(2*mu)) + sigma/((y*sigma) + y + (sigma*mu)) +  ((sigma+1)*y)/(4*(mu^2)) - (sigma^2)/(4*y*(sigma+1)),0) #ok!
-    kdmu <- ki*dmu
-    Delta.beta <- crossprod(x,diag(ai*kdmu))
+  dmu <- ifelse(y>0,(-1/(2*mu)) + sigma/((y*sigma) + y + (sigma*mu)) +  ((sigma+1)*y)/(4*(mu^2)) - (sigma^2)/(4*y*(sigma+1)),0) #ok!
+  kdmu <- ki*dmu
+  Delta.beta <- crossprod(x,diag(ai*kdmu))
 
 
 
-    dsigma <- ifelse(y>0,(y+ mu)/((sigma*y) + y + (sigma*mu)) - y/(4*mu) - (sigma*(sigma+2)*mu)/(4*(sigma+1)*(sigma+1)*y) + sigma/(2*(sigma+1)),0)
-    kdsigma <- ki*dsigma
-    Delta.alpha <- crossprod(z,diag(bi*kdsigma))
+  dsigma <- ifelse(y>0,(y+ mu)/((sigma*y) + y + (sigma*mu)) - y/(4*mu) - (sigma*(sigma+2)*mu)/(4*(sigma+1)*(sigma+1)*y) + sigma/(2*(sigma+1)),0)
+  kdsigma <- ki*dsigma
+  Delta.alpha <- crossprod(z,diag(bi*kdsigma))
 
 
-    dnu <- ifelse(y==0,(1/(nu*(1-nu))),0) - 1/(1-nu)
-    Delta.nu <- crossprod(w,diag(ci*dnu))
+  dnu <- ifelse(y==0,(1/(nu*(1-nu))),0) - 1/(1-nu)
+  Delta.nu <- crossprod(w,diag(ci*dnu))
 
-    Delta <- rbind(Delta.beta,Delta.alpha,Delta.nu)
+  Delta <- rbind(Delta.beta,Delta.alpha,Delta.nu)
 
-    ##################theta#########################
-    BT <- B(Delta,solve(h0),B4)
-    autovmaxthetaPC <- eigen(BT,symmetric=TRUE)$val[1]
-    vetorpcthetaPC <- eigen(BT,symmetric=TRUE)$vec[,1]
-    dmaxG.theta <- abs(vetorpcthetaPC)
-    vCithetaPC <- 2*abs(diag(BT))
-    Cb0 <- vCithetaPC
-    Cb.theta <-Cb0/sum(Cb0)
-    ######################beta's########################
-    BM<-B(Delta,solve(h0),B1)
-    autovmaxbetaPC<-eigen(BM,symmetric=TRUE)$val[1]
-    vetorpcbetaPC<-eigen(BM,symmetric=TRUE)$vec[,1]
-    dmaxG.beta<-abs(vetorpcbetaPC)
-    vCibetaPC<-2*abs(diag(BM))
-    Cb1<-vCibetaPC
-    Cb.beta<-Cb1/sum(Cb1)
-    ####################alpha's#########################
-    BD<-B(Delta,solve(h0),B2)
-    autovmaxdeltaPC<-eigen(BD,symmetric=TRUE)$val[1]
-    vetordeltaPC<-eigen(BD,symmetric=TRUE)$vec[,1]
-    dmaxG.alpha=abs(vetordeltaPC)
-    vCideltaPC=2*abs(diag(BD))
-    Cb2=vCideltaPC
-    Cb.alpha=Cb2/sum(Cb2)
-    ####################gamma's#########################
-    BP<-B(Delta,solve(h0),B3)
-    autovmaxgammaPC<-eigen(BP,symmetric=TRUE)$val[1]
-    vetorgammaPC<-eigen(BP,symmetric=TRUE)$vec[,1]
-    dmaxG.gamma=abs(vetorgammaPC)
-    vCigammaPC=2*abs(diag(BP))
-    Cb3=vCigammaPC
-    Cb.gamma=Cb3/sum(Cb3)
+  ##################theta#########################
+  BT <- B(Delta,solve(h0),B4)
+  autovmaxthetaPC <- eigen(BT,symmetric=TRUE)$val[1]
+  vetorpcthetaPC <- eigen(BT,symmetric=TRUE)$vec[,1]
+  dmaxG.theta <- abs(vetorpcthetaPC)
+  vCithetaPC <- 2*abs(diag(BT))
+  Cb0 <- vCithetaPC
+  Cb.theta <-Cb0/sum(Cb0)
+  ######################beta's########################
+  BM<-B(Delta,solve(h0),B1)
+  autovmaxbetaPC<-eigen(BM,symmetric=TRUE)$val[1]
+  vetorpcbetaPC<-eigen(BM,symmetric=TRUE)$vec[,1]
+  dmaxG.beta<-abs(vetorpcbetaPC)
+  vCibetaPC<-2*abs(diag(BM))
+  Cb1<-vCibetaPC
+  Cb.beta<-Cb1/sum(Cb1)
+  ####################alpha's#########################
+  BD<-B(Delta,solve(h0),B2)
+  autovmaxdeltaPC<-eigen(BD,symmetric=TRUE)$val[1]
+  vetordeltaPC<-eigen(BD,symmetric=TRUE)$vec[,1]
+  dmaxG.alpha=abs(vetordeltaPC)
+  vCideltaPC=2*abs(diag(BD))
+  Cb2=vCideltaPC
+  Cb.alpha=Cb2/sum(Cb2)
+  ####################gamma's#########################
+  BP<-B(Delta,solve(h0),B3)
+  autovmaxgammaPC<-eigen(BP,symmetric=TRUE)$val[1]
+  vetorgammaPC<-eigen(BP,symmetric=TRUE)$vec[,1]
+  dmaxG.gamma=abs(vetorgammaPC)
+  vCigammaPC=2*abs(diag(BP))
+  Cb3=vCigammaPC
+  Cb.gamma=Cb3/sum(Cb3)
 
 
-    result <- list(dmax.beta = dmaxG.beta,
-                   dmax.alpha = dmaxG.alpha,
-                   dmax.gamma = dmaxG.gamma,
-                   dmax.theta = dmaxG.theta,
-                   Ci.beta = Cb.beta,
-                   Ci.alpha = Cb.alpha,
-                   Ci.gamma = Cb.gamma,
-                   Ci.theta = Cb.theta)
-    return(result)
- # }
-
-  # if(scheme=="response")
-  # {
-  #   ############################Response####################################
-  #   mu <- model$mu.fv
-  #   sigma <- model$sigma.fv
-  #   eta <- linkfun(mu)
-  #   ai <- mu.eta(eta)
-  #   tau <- sigma_linkfun(sigma)
-  #   bi <- sigma_mu.eta(tau)
-  #   phi<- ((2*sigma)+5)/((sigma+1)^2)
-  #   sy<- sqrt((mu^2)*phi)
-  #
-  #   dymu <- -(sigma*(sigma+1))/( ((sigma*y)  + y  + (sigma*mu))^2) + (sigma+1)/(4*(mu^2)) +  ((sigma^2)/(4*(sigma+1)*(y^2)))
-  #   Deltamu <- crossprod(x,diag(ai*dymu*sy))
-  #
-  #   dysigma <- (-mu/( ((sigma*y) + y + (sigma*mu))^2))  -  1/(4*mu) + (sigma*(sigma+2)*mu)/(4*(y^2)*((sigma+1)^2))
-  #   Deltasigma <- crossprod(z,diag(bi*dysigma*sy))
-  #
-  #
-  #   Delta <- rbind(Deltamu,Deltasigma)
-  #
-  #   ###############thetas###########################
-  #   BT<-B(Delta,solve(h0),B3)
-  #   autovmaxthetaPC<- eigen(BT,symmetric=TRUE)$val[1]
-  #   vetorthetaRP<- eigen(BT,symmetric=TRUE)$vec[,1]
-  #   dmaxG.theta<-abs(vetorthetaRP)
-  #   vCithetaRP<-2*abs(diag(BT))
-  #   Cb0<-vCithetaRP
-  #   Cb.theta<-Cb0/sum(Cb0)
-  #
-  #   #################betas##########################
-  #   BM=B(Delta,solve(h0),B1)
-  #   autovmaxbetaRP <- eigen(BM,symmetric=TRUE)$val[1]
-  #   vetorbetaRP <- eigen(BM,symmetric=TRUE)$vec[,1]
-  #   dmaxG.beta <- abs(vetorbetaRP)
-  #   vCibetaRP <- 2*abs(diag(BM))
-  #   Cb1 <- vCibetaRP
-  #   Cb.beta <- Cb1/sum(Cb1)
-  #   ####################alpha#######################
-  #   BD=B(Delta,solve(h0),B2)
-  #   autovmaxdeltaRP <- eigen(BD,symmetric=TRUE)$val[1]
-  #   vetordeltaRP <- eigen(BD,symmetric=TRUE)$vec[,1]
-  #   dmaxG.alpha <- abs(vetordeltaRP)
-  #   vCideltaRP <- 2*abs(diag(BD))
-  #   Cb2 <- vCideltaRP
-  #   Cb.alpha <- Cb2/sum(Cb2)
-  #
-  #
-  #   result <- list(dmax.beta = dmaxG.beta,
-  #                  dmax.alpha = dmaxG.alpha,
-  #                  dmax.theta = dmaxG.theta,
-  #                  Ci.beta = Cb.beta,
-  #                  Ci.alpha = Cb.alpha,
-  #                  Ci.theta = Cb.theta)
-  #   return(result)
-  # }
+  result <- list(dmax.beta = dmaxG.beta,
+                 dmax.alpha = dmaxG.alpha,
+                 dmax.gamma = dmaxG.gamma,
+                 dmax.theta = dmaxG.theta,
+                 Ci.beta = Cb.beta,
+                 Ci.alpha = Cb.alpha,
+                 Ci.gamma = Cb.gamma,
+                 Ci.theta = Cb.theta)
+  return(result)
 }
+
+
+
+

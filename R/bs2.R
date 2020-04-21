@@ -130,3 +130,70 @@ NULL
 #'
 NULL
 
+
+#'Data papatoes
+#'
+#'@docType data
+#'@keywords datasets
+#'@name papatoes
+#'@usage data(papatoes)
+NULL
+
+#'Data census
+#'
+#'@docType data
+#'@keywords datasets
+#'@name census
+#'@usage data(census)
+NULL
+
+#'Data corn
+#'
+#'@docType data
+#'@keywords datasets
+#'@name corn
+#'@usage data(corn)
+NULL
+
+
+#'Data fishing
+#'
+#'@docType data
+#'@keywords datasets
+#'@name fishing
+#'@usage data(fishing)
+NULL
+
+#'Data insurance
+#'
+#'@docType data
+#'@keywords datasets
+#'@name insurance
+#'@usage data(insurance)
+NULL
+
+
+#'Data turbine
+#'
+#'@docType data
+#'@keywords datasets
+#'@name turbine
+#'@usage data(turbine)
+NULL
+
+
+#'Data oil
+#'
+#'@docType data
+#'@keywords datasets
+#'@name oil
+#'@usage data(oil)
+NULL
+
+#'Data timerepair
+#'
+#'@docType data
+#'@keywords datasets
+#'@name timerepair
+#'@usage data(timerepair)
+NULL

@@ -2,14 +2,35 @@
 % Please edit documentation in R/zabs.R
 \name{ZARBS}
 \alias{ZARBS}
+\alias{dZARBS}
+\alias{pZARBS}
+\alias{qZARBS}
+\alias{rZARBS}
+\alias{plotZARBS}
+\alias{meanZARBS}
 \title{Zero-Adjusted Reparameterized Birnbaum-Saunders (ZARBS) distribution for fitting a GAMLSS}
 \usage{
-ZARBS(mu.link = "identity", sigma.link = "identity")
-dZARBS(x, mu = 1, sigma = 1, nu=0.1, log = FALSE)
-pZARBS(q, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-qZARBS(p, mu = 1, sigma = 1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
-rZARBS(n, mu = 1, sigma = 1)
-plotZARBS(mu = .5, sigma = 1,  nu=0.1, from = 0, to = 0.999, n = 101, ...)
+ZARBS(mu.link = "log", sigma.link = "log", nu.link = "logit")
+
+dZARBS(x, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
+
+pZARBS(q, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
+
+qZARBS(p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
+
+rZARBS(n, mu = 0.5, sigma = 1, nu = 0.1)
+
+plotZARBS(
+  mu = 0.5,
+  sigma = 1,
+  nu = 0.1,
+  from = 0,
+  to = 0.999,
+  n = 101,
+  title = "title",
+  ...
+)
+
 meanZARBS(obj)
 }
 \arguments{
@@ -17,13 +38,17 @@ meanZARBS(obj)
 
 \item{sigma.link}{type of residual to be used.}
 
-\item{x, q}{vector of quantiles}
+\item{nu.link}{link function of the parameter nu.}
 
-\item{mu}{vector of scale parameter values}
+\item{x, q}{vector of quantiles.}
 
-\item{sigma}{vector of shape parameter values}
+\item{mu}{vector of scale parameter values.}
 
-\item{log, }{log.p logical; if TRUE, probabilities p are given as log(p).}
+\item{sigma}{vector of shape parameter values.}
+
+\item{nu}{vector of mixture parameter values.}
+
+\item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x]}
 
@@ -31,13 +56,15 @@ meanZARBS(obj)
 
 \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required.}
 
-\item{from}{where to start plotting the distribution from}
+\item{from}{where to start plotting the distribution from.}
 
-\item{to}{up to where to plot the distribution}
+\item{to}{up to where to plot the distribution.}
 
-\item{obj}{a fitted ZARBS object}
+\item{title}{title of the plot.}
 
-\item{...}{other graphical parameters for plotting}
+\item{...}{other graphical parameters for plotting.}
+
+\item{obj}{a fitted ZARBS object.}
 }
 \value{
 returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function.
@@ -61,17 +88,10 @@ The parametrization of the zero adjusted reparameterized Birnbaum-Saunders distr
 For the function ZARBS(), mu is the mean and sigma is the precision parameter and nu is the proportion of zeros of the ZARBS distribution.
 }
 \examples{
-plotZARBS()
-dat <- rZARBS(1000); hist(dat)
-fit <- gamlss(dat~1,family=ZARBS(),method=CG())
-meanZARBS(fit)
-
-data(papatoes);
-fit = gamlss(I(Demand/10000)~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=papatoes)
-summary(fit)
-
 data(oil)
-fit1 = gamlss(Demand~1,sigma.formula=~1, nu.formula=~1, family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),method=CG(),data=oil)
+fit1 = gamlss::gamlss(Demand~1,sigma.formula=~1, nu.formula=~1,
+family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),
+method=CG(),data=oil)
 summary(fit1)
 
 }

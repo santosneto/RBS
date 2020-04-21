@@ -4,7 +4,9 @@
 \name{psi26}
 \alias{psi26}
 \title{Lifetimes of aluminum specimens exposed to a maximum stress of 26,000 psi.}
-\format{A vector containing 102 observations.}
+\format{
+A vector containing 102 observations.
+}
 \usage{
 data(psi26)
 }

@@ -1,12 +1,15 @@
-#'Precision test
+#'@name test
+#'
+#'@aliases lr.test
+#'@aliases grad.test
+#'@aliases wald.test
+#'@aliases score.test
+#'
+#'@title Precision test
 #'
 #'@description Tests the null hypothesis of precision fixed in RBS models against the alternative of precision variable.
 #'
 #'@usage lr.test(modelh0,modelh1)
-#'grad.test(modelh0,modelh1)
-#'wald.test(modelh1)
-#'score.test(modelh0,modelh1)
-#'
 #'
 #' @param modelh0 model under null hypothesis.
 #' @param modelh1 model under alternative hypothesis.
@@ -24,21 +27,24 @@
 #'@examples
 #'
 #'##
-#'library(alr3)
-#'data(landrent)
+#'data(landrent,package='alr3')
 #'attach(landrent)
-#'resp <- I(Y/X1)
+#'resp <- as.vector(I(Y/X1))
 #'y1 <-  split(resp, X4)$"1"
 #'x21 <-  split(X2, X4)$"1"
 #'##Fixed Precision
-#'fit0 <- gamlss(y1 ~ x21, family=RBS(mu.link="identity"),method=CG()  )
+#'fit0 <- gamlss::gamlss(y1 ~ x21, family=RBS(mu.link="identity",sigma.link='identity'),method=CG()  )
 #'##Varying Precision
-#'fit1 <- gamlss(y1 ~ x21,sigma.formula = y1 ~x21, family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
+#'fit1 <- gamlss::gamlss(y1 ~ x21,sigma.formula = y1 ~x21,
+#'family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
 #'#Precision Test
 #'lr.test(fit0,fit1)
 #'score.test(fit0,fit1)
 #'grad.test(fit0,fit1)
 #'wald.test(fit1)
+#'
+#'@importFrom stats pchisq
+#'
 #'@export
 
 lr.test <- function(modelh0,modelh1)
@@ -74,29 +80,10 @@ lr.test <- function(modelh0,modelh1)
 }
 
 
-#'Precision test
+#'@rdname test
 #'
-#'@description Tests the null hypothesis of precision fixed in RBS models against the alternative of precision variable.
+#'@importFrom stats pchisq
 #'
-#'@usage lr.test(modelh0,modelh1)
-#'grad.test(modelh0,modelh1)
-#'wald.test(modelh0,modelh1)
-#'score.test(modelh0,modelh1)
-#'
-#'
-#' @param modelh0 model under null hypothesis.
-#' @param modelh1 model under alternative hypothesis.
-#'
-#' @return A list with class "htest" containing the following components:
-#' @return \code{statistic}	the value of the test statistic.
-#' @return \code{parameter}	the degrees of freedom for the test statistic.
-#' @return \code{p.value}	the p-value for the test.
-#' @return \code{method}	a character string indicating what type of likelihood ratio test was performed.
-#' @return \code{data.name} a character string giving the name(s) of the data
-#'
-#'@author
-#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-#'#'
 #'@export
 
 grad.test=function(modelh0,modelh1)
@@ -136,29 +123,10 @@ grad.test=function(modelh0,modelh1)
 }
 
 
-#'Precision test
+#'@rdname test
 #'
-#'@description Tests the null hypothesis of precision fixed in RBS models against the alternative of precision variable.
+#'@importFrom stats pchisq
 #'
-#'@usage lr.test(modelh0,modelh1)
-#'grad.test(modelh0,modelh1)
-#'wald.test(modelh0,modelh1)
-#'score.test(modelh0,modelh1)
-#'
-#'
-#' @param modelh0 model under null hypothesis.
-#' @param modelh1 model under alternative hypothesis.
-#'
-#' @return A list with class "htest" containing the following components:
-#' @return \code{statistic}	the value of the test statistic.
-#' @return \code{parameter}	the degrees of freedom for the test statistic.
-#' @return \code{p.value}	the p-value for the test.
-#' @return \code{method}	a character string indicating what type of likelihood ratio test was performed.
-#' @return \code{data.name} a character string giving the name(s) of the data
-#'
-#'@author
-#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-#'#'
 #'@export
 #'
 wald.test=function(modelh1) #ok! est? implementado corretamente
@@ -249,33 +217,12 @@ wald.test=function(modelh1) #ok! est? implementado corretamente
   return(RVAL)
 }
 
-#'Precision test
+#'@rdname test
 #'
-#'@description Tests the null hypothesis of precision fixed in RBS models against the alternative of precision variable.
-#'
-#'@usage lr.test(modelh0,modelh1)
-#'grad.test(modelh0,modelh1)
-#'wald.test(modelh0,modelh1)
-#'score.test(modelh0,modelh1)
-#'
-#'
-#' @param modelh0 model under null hypothesis.
-#' @param modelh1 model under alternative hypothesis.
-#'
-#' @return A list with class "htest" containing the following components:
-#' @return \code{statistic}	the value of the test statistic.
-#' @return \code{parameter}	the degrees of freedom for the test statistic.
-#' @return \code{p.value}	the p-value for the test.
-#' @return \code{method}	a character string indicating what type of likelihood ratio test was performed.
-#' @return \code{data.name} a character string giving the name(s) of the data
-#'
-#'@author
-#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-#'
-#'
+#'@importFrom stats pchisq
 #'@export
 
-score.test=function(modelH0,modelH1)
+score.test=function(modelh0,modelh1)
 {
 
   UalphaH0.gam = function(modelh0,modelh1)
@@ -364,12 +311,12 @@ score.test=function(modelH0,modelH1)
   METHOD = "Rao score test"
   DNAME  = deparse(substitute(modelh0))
   DNAME  = paste(DNAME, "vs", deparse(substitute(modelh1)))
-  p = modelH0$mu.df
+  p = modelh0$mu.df
   p1= p+1
-  varalpha = vcovH0(modelH0,modelH1)[-(1:p1),-(1:p1)]
-  Ua.= UalphaH0.gam(modelH0,modelH1)[-1]
+  varalpha = vcovH0(modelh0,modelh1)[-(1:p1),-(1:p1)]
+  Ua.= UalphaH0.gam(modelh0,modelh1)[-1]
   SC = t(Ua.)%*%varalpha%*%Ua.
-  q = modelH1$sigma.df
+  q = modelh1$sigma.df
   gl = q-1
   PVAL = pchisq(SC,q-1,lower.tail= F)
   names(gl) = "df"
@@ -381,7 +328,12 @@ score.test=function(modelH0,modelH1)
 }
 
 
-#'Goodness of Fit Tests
+#'@name testg
+#'
+#'@aliases ad.testg
+#'@aliases cvm.testg
+#'
+#'@title Goodness of Fit Tests
 #'
 #'@description Performs the Anderson-Darlin and Cramer-von Mises tests
 #'
@@ -389,8 +341,8 @@ score.test=function(modelH0,modelH1)
 #'cvm.testg(x,cdf)
 #'
 #'
-#' @param x a numeric vector of data values, the number of which must be greater than 7. Missing values are allowed.
-#' @param cdf cumulative distribution function.
+#'@param x a numeric vector of data values, the number of which must be greater than 7. Missing values are allowed.
+#'@param cdf cumulative distribution function.
 #'
 #' @return A list with class "htest" containing the following components:
 #' @return \code{statistic}	the value of the test statistic.
@@ -414,15 +366,18 @@ score.test=function(modelH0,modelH1)
 #'
 #'@examples
 #'x<- rRBS(1000)
-#'fit <- gamlss(x~1,family=RBS(),method=CG())
+#'fit <- gamlss::gamlss(x~1,family=RBS(mu.link='identity',sigma.link='identity'),method=CG())
 #'mu<- fit$mu.coefficients ; mu
 #' sigma <- fit$sigma.coefficients ; sigma
 #' cdf <- function(x) pRBS(x,mu,sigma)
 #' ad.testg(x,cdf)
 #' cvm.testg(x,cdf)
+#'
+#'@importFrom stats complete.cases
+#'@importFrom nortest ad.test
+#'
 #'@export
 
-#'@importFrom nortest ad.test
 ad.testg = function(x,cdf)
 {
   DNAME <- deparse(substitute(x))
@@ -438,47 +393,12 @@ ad.testg = function(x,cdf)
   return(RVAL)
 }
 
-#'Goodness of Fit Tests
+#'@rdname testg
 #'
-#'@description Performs the Anderson-Darlin and Cramer-von Mises tests
-#'
-#'@usage ad.testg(x,cdf)
-#'cvm.testg(x,cdf)
-#'
-#'
-#' @param x a numeric vector of data values, the number of which must be greater than 7. Missing values are allowed.
-#' @param cdf cumulative distribution function.
-#'
-#' @return A list with class "htest" containing the following components:
-#' @return \code{statistic}	the value of the test statistic.
-#' @return \code{p.value}	the p-value for the test.
-#' @return \code{method}	a character string indicating what type of likelihood ratio test was performed.
-#' @return \code{data.name} a character string giving the name(s) of the data
-#'
-#'@author
-#'Manoel Santos-Neto \email{manoel.ferreira@ufcg.edu.br}, F.J.A. Cysneiros \email{cysneiros@de.ufpe.br}, Victor Leiva \email{victorleivasanchez@gmail.com} and Michelli Barros \email{michelli.karinne@gmail.com}
-#'
-#'
-#'@references
-#'Stephens, M.A. (1986): Tests based on EDF statistics. In: D'Agostino, R.B. and Stephens, M.A., eds.: Goodness-of-Fit Techniques. Marcel Dekker, New York.
-#'
-#'Thode Jr., H.C. (2002): Testing for Normality. Marcel Dekker, New York.
-#'
-#'Chen, G., Balakrishnan, N. (1995) A general purpose approximate goodness-of-fit test,  \emph{J. Quality Technol.},  v. 27, 154-161.
-#'
-#'Barros, M., Leiva, V., Ospina, R. ; Tsuyuguchi, A.B. (2014) Goodness-of-fit tests based on the Birnbaum-Saunders distribution for censored reliability data analysis. \emph{IEEE Transactions on Reliability}, v. 63, p. 543/554.
-#'
-#'@examples
-#'x<- rRBS(1000)
-#'fit <- gamlss(x~1,family=RBS(),method=CG())
-#'mu<- fit$mu.coefficients ; mu
-#'sigma <- fit$sigma.coefficients ; sigma
-#' cdf <- function(x) pRBS(x,mu,sigma)
-#' ad.testg(x,cdf)
-#' cvm.testg(x,cdf)
 #'@export
+#'@importFrom nortest cvm.test
+#'@importFrom stats complete.cases
 
-#' @importFrom nortest cvm.test
 cvm.testg = function(x,cdf)
 {
   DNAME <- deparse(substitute(x))

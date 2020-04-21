@@ -17,42 +17,6 @@ Residuals extracted from the object object.
 \description{
 \code{residuals} is a function which extracts model residuals from objects returned by modeling functions.
 }
-\examples{
-##
-library(alr3)
-data(landrent)
-attach(landrent)
-resp <- I(Y/X1)
-y1 <-  split(resp, X4)$"1"
-x21 <-  split(X2, X4)$"1"
-
-##Fixed Precision
-fit0 <- gamlss(y1 ~ x21, family=RBS(mu.link="identity"),method=CG()  )
-plot(fitted(fit0),residuals(fit0),xlab="fitted values",ylab="Deviance")
-##Varying Precision
-fit1 <- gamlss(y1 ~ x21,sigma.formula = y1 ~x21, family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
-plot(fitted(fit1),residuals(fit1),xlab="fitted values",ylab="Deviance")
-
-library(texreg)
-library(ssym)
-data(Snacks,package="ssym")
-head(Snacks)
-attach(Snacks)
-type <- factor(type,labels = c("A","B","C","D","E"))
-w1 <- week
-w2 <- I(week^2)
-fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
-plotreg(fit., custom.model.names = "",custom.note = "CI")
-summary(fit.)
-plot(fit.$mu.fv,residuals(fit.,residual="deviance"),ylab="Residuals",xlab="Fitted Values",pch=19,lwd=2,ylim=c(-4,4))
-abline(h=2,lwd=2,lty=2)
-abline(h=-2,lwd=2,lty=2)
-text(fit.$mu.fv[c(91)],residuals(fit.,residual="deviance")[c(91)]-.2,c(91))
-
-
-
-
-}
 \references{
 Leiva, V., Santos-Neto, M., Cysneiros, F.J.A, Barros, M. (2014)  Birnbaum-Saunders statistical modelling: a new approach. \emph{Statistical Modelling}, v. 14, p. 21-48, 2014.
 

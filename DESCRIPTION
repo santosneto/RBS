@@ -1,22 +1,13 @@
 Package: RBS
-Title: Reparameterized Birnbaum-Saunders regression model
+Title: The regression models for the RBS and ZARBS distributions 
 Version: 1.0-1
-Authors@R: person("Manoel", "Santos-Neto", email = "manoel.ferreira@ufcg.edu.com", role = c("aut", "cre"))
-Description: This package includes the estimation of model parameters,
-    hypothesis tests for the precision parameter, a residual analysis and influence
-    diagnostic tools
-Depends:
-    R (>= 3.1.2),
-    gamlss,
-    gmm,
-    pracma,
-    gamlss.nl
-License: GNU GPL v2
+Date: 2020-04-20
+Authors@R: person("Manoel", "Santos-Neto", email = "santosnetoce@protonmail.com", role = c("aut", "cre"))
+Description: This package includes the estimation of model parameters, hypothesis tests for the precision parameter, a residual analysis and influence diagnostic tools.
+Maintainer: Manoel Santos-Neto <santosnetoce@protonmail.com>
+Depends: R (>= 3.1.2), stats, graphics,  grDevices, pracma
+License: GPL-3 + file LICENSE
 LazyData: true
-RoxygenNote: 7.0.2
-Imports:
-    gamlss,
-    pracma,
-    nortest,
-    gamlss.nl
+RoxygenNote: 7.1.0
+Imports: MASS, survival, methods, ggplot2, nortest, gmm, faraway, alr3, nlme, gamlss, gamlss.dist, gamlss.nl, splines
 Encoding: UTF-8

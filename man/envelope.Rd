@@ -2,17 +2,46 @@
 % Please edit documentation in R/envelopebs.R
 \name{envelope}
 \alias{envelope}
-\title{Simulated Evelope}
+\alias{envelope.ZARBS}
+\alias{envelope.ZAGA}
+\title{Envelopes}
 \usage{
-envelope(model,k=19,alpha=0.05,res="deviance", precision = c("fixed","varying"),
-dist = RBS(mu.link = "identity",sigma.link = "identity"),...)
+envelope(
+  model,
+  k = 100,
+  res = "deviance",
+  precision = "fixed",
+  dist = RBS(mu.link = "identity", sigma.link = "identity"),
+  color = "grey50",
+  xlabel = "Theorical Quantile",
+  ylabel = "Empirical Quantile",
+  font = "serif"
+)
+
+envelope.ZARBS(
+  model,
+  k = 100,
+  precision = "fixed",
+  color = "grey50",
+  xlabel = "Theorical Quantile",
+  ylabel = "Empirical Quantile",
+  font = "serif"
+)
+
+envelope.ZAGA(
+  model,
+  k = 100,
+  precision = "fixed",
+  color = "grey50",
+  xlabel = "Theorical Quantile",
+  ylabel = "Empirical Quantile",
+  font = "serif"
+)
 }
 \arguments{
 \item{model}{object of class \code{gamlss} holding the fitted model.}
 
 \item{k}{number of replications for envelope construction. Default is 19.}
-
-\item{alpha}{value giving the size of the envelope. Default is 0.05 which is equivalent to a 95\% band.}
 
 \item{res}{type of residuals to be extracted. Default is deviance.}
 
@@ -20,59 +49,20 @@ dist = RBS(mu.link = "identity",sigma.link = "identity"),...)
 else a model with precision variable is used.}
 
 \item{dist}{The function RBS() defines the RBS distribution.}
+
+\item{color}{the color of the envelope.}
+
+\item{xlabel}{a label for the x axis.}
+
+\item{ylabel}{a label for the y axis.}
+
+\item{font}{the font used in x and y axis.}
 }
 \value{
-A simulated envelope of the class RBS.
+A simulated envelope of the class RBS, ZARBS and ZAGA.
 }
 \description{
 A normal plot with simulated envelope of the residual is produced.
-}
-\examples{
-
-## Fixed Precision
-library(faraway)
-data(cpd)
-attach(cpd)
-model0 = gamlss(actual ~ projected, family=RBS(mu.link="identity"),method=CG())
-summary(model0)
-set.seed(2015)
-envelope(model0)
-model = gamlss(actual ~ 0+projected, family=RBS(mu.link="identity"),method=CG())
-summary(model)
-set.seed(2015)
-envelope(model)
-
-##
-library(alr3)
-data(landrent)
-attach(landrent)
-resp <- I(Y/X1)
-y1 <-  split(resp, X4)$"1"
-x21 <-  split(X2, X4)$"1"
-
-##Fixed Precision
-fit0 <- gamlss(y1 ~ x21, family=RBS(mu.link="identity"),method=CG()  )
-summary(fit0)
-set.seed(2015)
-envelope(fit0,alpha=0.01, precision="fixed",res="quantile",dist=RBS(mu.link="identity"))
-##Varying Precision
-fit1 <- gamlss(y1 ~ x21,sigma.formula = y1 ~x21, family=RBS(mu.link="identity",sigma.link="sqrt"),method=CG()  )
-summary(fit11)
-set.seed(2015)
-envelope(fit1,alpha=0.01, precision="varying",res="quantile",dist=RBS(mu.link="identity",sigma.link="sqrt"))
-
-
-
-library(ssym)
-data(Snacks,package="ssym")
-head(Snacks)
-attach(Snacks)
-type <- factor(type,labels = c("A","B","C","D","E"))
-w1 <- week
-w2 <- I(week^2)
-fit. <- gamlss(texture~type+w1+w2,~type, family=RBS(mu.link="log",sigma.link = "log"),method=CG())
-summary(fit.)
-envelope(fit.,dist=RBS(mu.link="log",sigma.link = "log"),precision = "varying",color="white",xlabel = "perc",ylabel = "rd",border.col = "black")
 }
 \references{
 Atkinson, A. C. (1985) Plots, transformations and regression : an introduction to graphical methods of diagnostic regression analysis. Oxford Science Publications, Oxford.

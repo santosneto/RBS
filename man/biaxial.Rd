@@ -4,7 +4,9 @@
 \name{biaxial}
 \alias{biaxial}
 \title{Brown and Miller's biaxial fatigue data}
-\format{A vector containing 46 observations.}
+\format{
+A vector containing 46 observations.
+}
 \usage{
 data(biaxial)
 }

@@ -4,7 +4,9 @@
 \name{bearings}
 \alias{bearings}
 \title{Fatigue lifetime data}
-\format{A vector containing 10 observations.}
+\format{
+A vector containing 10 observations.
+}
 \usage{
 data(bearings)
 }
