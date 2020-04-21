@@ -128,7 +128,7 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
                  rqres = expression(rqres(pfun="pZARBS", type="Mixed",  mass.p=0,
                                           prob.mp=nu, y=y, mu=mu, sigma=sigma, nu=nu)),
                  mu.initial =  expression({mu <- rep(median(y),length(y)) }),
-                 sigma.initial =  expression({sigma <- rep( 1/(sqrt(mean(y)/harmmean(y))-1),length(y)) }),
+                 sigma.initial =  expression({sigma <- rep( 1/(sqrt(mean(y[y>0])/harmmean(y[y>0]))-1),length(y)) }),
                  nu.initial =  expression(   nu <- rep(mean(1*(y==0)), length(y))),
                  mu.valid = function(mu) TRUE ,
                  sigma.valid = function(sigma)  all(sigma > 0),
