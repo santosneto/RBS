@@ -67,7 +67,7 @@
 #'summary(fit1)
 #'
 #'@importFrom gamlss.dist checklink
-#'
+#'@importFrom pracma harmmean
 #'@export
 #'
 ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
@@ -127,9 +127,9 @@ ZARBS <- function(mu.link = "log", sigma.link = "log", nu.link = "logit")
                    -2*dZARBS(y,mu,sigma,nu,log=TRUE),
                  rqres = expression(rqres(pfun="pZARBS", type="Mixed",  mass.p=0,
                                           prob.mp=nu, y=y, mu=mu, sigma=sigma, nu=nu)),
-                 mu.initial =  expression(mu <- (y+mean(y))/2),
-                 sigma.initial =  expression(sigma <- rep(1,length(y))),
-                 nu.initial =  expression(   nu <- rep(0.5, length(y))),
+                 mu.initial =  expression({mu <- rep(median(y),length(y)) }),
+                 sigma.initial =  expression({sigma <- rep( 1/(sqrt(mean(y)/harmmean(y))-1),length(y)) }),
+                 nu.initial =  expression(   nu <- rep(mean(1*(y==0)), length(y))),
                  mu.valid = function(mu) TRUE ,
                  sigma.valid = function(sigma)  all(sigma > 0),
                  nu.valid = function(nu) all(nu > 0) && all(nu < 1),
