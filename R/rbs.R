@@ -267,7 +267,7 @@ RBS <- function (mu.link = "log" , sigma.link="log")
                  G.dev.incr = function(y,mu,sigma,...) -2*dRBS(y,mu,sigma,log=TRUE),
                  rqres = expression(rqres(pfun = "pRBS", type = "Continuous", y = y, mu = mu, sigma = sigma)),
                  mu.initial = expression({mu <- rep(mean(y),length(y)) }),
-                 sigma.initial = expression({sigma <- rep( 1/(sqrt(mean(y)/harmmean(y))-1),length(y)) }),
+                 sigma.initial = expression({sigma <- rep(1,length(y)) }),
                  mu.valid = function(mu) all(mu>0) ,
                  sigma.valid = function(sigma) all(sigma > 0),
                  y.valid = function(y) all(y > 0),
