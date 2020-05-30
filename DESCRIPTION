@@ -1,6 +1,6 @@
 Package: RBS
 Title: Regression models for Birnbaum-Saunders distributions 
-Version: 1.0-2
+Version: 1.0-3
 Date: 2020-04-20
 Authors@R: person("Manoel", "Santos-Neto", email = "santosnetoce@protonmail.com", role = c("aut", "cre"))
 Description: This package includes the estimation of model parameters, hypothesis tests for the precision parameter, a residual analysis and influence diagnostic tools.
