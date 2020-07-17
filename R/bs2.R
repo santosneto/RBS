@@ -197,3 +197,13 @@ NULL
 #'@name timerepair
 #'@usage data(timerepair)
 NULL
+
+
+
+#'Data FUMCorn
+#'
+#'@docType data
+#'@keywords datasets
+#'@name FUMCorn
+#'@usage data(FUMCorn)
+NULL
