@@ -6,8 +6,12 @@
 \title{Data FUMCorn}
 \usage{
 data(FUMCorn)
+
+data(FUMCorn)
 }
 \description{
+Data FUMCorn
+
 Data FUMCorn
 }
 \keyword{datasets}

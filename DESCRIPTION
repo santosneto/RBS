@@ -1,13 +1,13 @@
 Package: RBS
 Title: Regression models for Birnbaum-Saunders distributions 
-Version: 1.0-4
-Date: 2020-04-20
+Version: 1.1-4
+Date: 2021-02-04
 Authors@R: person("Manoel", "Santos-Neto", email = "santosnetoce@protonmail.com", role = c("aut", "cre"))
 Description: This package includes the estimation of model parameters, hypothesis tests for the precision parameter, a residual analysis and influence diagnostic tools.
 Maintainer: Manoel Santos-Neto <santosnetoce@protonmail.com>
-Depends: R (>= 3.1.2), stats, graphics,  grDevices, pracma
+Depends: R (>= 3.5.0), stats, graphics,  grDevices, pracma
 License: GPL-3 + file LICENSE
 LazyData: true
 RoxygenNote: 7.1.1
-Imports: MASS, survival, methods, ggplot2, nortest, gmm, faraway, alr3, nlme, gamlss, gamlss.dist, gamlss.nl, splines
+Imports: MASS, survival, methods, ggplot2, nortest, gmm, faraway, alr4, nlme, gamlss, gamlss.dist, gamlss.nl, splines
 Encoding: UTF-8

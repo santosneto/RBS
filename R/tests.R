@@ -366,8 +366,8 @@ score.test=function(modelh0,modelh1)
 #'
 #'@examples
 #'x<- rRBS(1000)
-#'fit <- gamlss::gamlss(x~1,family=RBS(mu.link='identity',sigma.link='identity'),method=CG())
-#'mu<- fit$mu.coefficients ; mu
+#'fit <- gamlss::gamlss(x~1,family=RBS(mu.link='log',sigma.link='identity'),method=CG())
+#'mu<- exp(fit$mu.coefficients) ; mu
 #' sigma <- fit$sigma.coefficients ; sigma
 #' cdf <- function(x) pRBS(x,mu,sigma)
 #' ad.testg(x,cdf)
