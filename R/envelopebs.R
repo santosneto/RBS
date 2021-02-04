@@ -35,10 +35,11 @@
 #'
 #'@importFrom graphics par points polygon
 #'@importFrom stats qqnorm
-#'@importFrom gamlss gamlss gamlss.control
+#'@importFrom gamlss gamlss
+#'@importFrom gamlss gamlss.control
 #'@import ggplot2
 #'@export
-envelope <- function(model, k = 100, res="deviance", precision = "fixed", dist = RBS(mu.link ="identity", sigma.link = "identity"), color = "grey50", xlabel = "Theorical Quantile",ylabel = "Empirical Quantile",font="serif")
+envelope <- function(model, k = 100, res = "deviance", precision = "fixed", dist = RBS(mu.link ="identity", sigma.link = "identity"), color = "grey50", xlabel = "Theorical Quantile",ylabel = "Empirical Quantile",font="serif")
 {
   if(precision != "fixed")
   {
@@ -62,7 +63,7 @@ envelope <- function(model, k = 100, res="deviance", precision = "fixed", dist =
       if(q==1){form1 <- nresp ~ 0 + Z} else {form1 <- nresp ~ Z[,-1]}
 
       conh0 = gamlss.control(trace = FALSE, autostep = FALSE, save = TRUE)
-      model1 <- gamlss(formula=form, sigma.formula = form1 ,family=dist, method=CG(),control = conh0)
+      model1 <- gamlss(formula = form, sigma.formula = form1 ,family = dist, method = CG(),control = conh0)
       rdf <- residuals(model1,residual=res)
 
       re[,i]=sort(rdf)
@@ -165,7 +166,7 @@ envelope <- function(model, k = 100, res="deviance", precision = "fixed", dist =
 #'@importFrom gamlss gamlss gamlss.control
 #'@import ggplot2
 #' @export
-envelope.ZARBS <- function (model, k = 100, precision = "fixed", color = "grey50", xlabel = "Theorical Quantile",ylabel = "Empirical Quantile",font="serif")
+envelope.ZARBS <- function(model, k = 100, precision = "fixed", color = "grey50", xlabel = "Theorical Quantile",ylabel = "Empirical Quantile",font="serif")
 {
   if (precision != "fixed") {
     n <- model$N

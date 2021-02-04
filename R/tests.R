@@ -27,7 +27,7 @@
 #'@examples
 #'
 #'##
-#'data(landrent,package='alr3')
+#'data(landrent,package='alr4')
 #'attach(landrent)
 #'resp <- as.vector(I(Y/X1))
 #'y1 <-  split(resp, X4)$"1"

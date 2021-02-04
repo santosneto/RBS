@@ -90,7 +90,7 @@ For the function ZARBS(), mu is the mean and sigma is the precision parameter an
 \examples{
 data(oil)
 fit1 = gamlss::gamlss(Demand~1,sigma.formula=~1, nu.formula=~1,
-family=ZARBS(mu.link="identity",sigma.link = "identity",nu.link = "identity"),
+family=ZARBS(mu.link="log",sigma.link = "identity",nu.link = "identity"),
 method=CG(),data=oil)
 summary(fit1)
 

@@ -8,6 +8,6 @@ Maintainer: Manoel Santos-Neto <santosnetoce@protonmail.com>
 Depends: R (>= 3.1.2), stats, graphics,  grDevices, pracma
 License: GPL-3 + file LICENSE
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports: MASS, survival, methods, ggplot2, nortest, gmm, faraway, alr3, nlme, gamlss, gamlss.dist, gamlss.nl, splines
 Encoding: UTF-8

@@ -199,6 +199,13 @@ NULL
 NULL
 
 
+#'Data FUMCorn
+#'
+#'@docType data
+#'@keywords datasets
+#'@name FUMCorn
+#'@usage data(FUMCorn)
+NULL
 
 #'Data FUMCorn
 #'
